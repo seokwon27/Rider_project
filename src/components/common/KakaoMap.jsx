@@ -11,11 +11,12 @@ const KakaoMap = ({ roadLine }) => {
       level: 3
     };
     const kakaoMap = new kakao.maps.Map(ref.current, mapOptions);
+    kakaoMap.addOverlayMapTypeId(kakao.maps.MapTypeId.BICYCLE);
     const path = roadLine.map((point) => new kakao.maps.LatLng(point.LINE_XP, point.LINE_YP));
     const polyline = new kakao.maps.Polyline({
       path,
       strokeWeight: 5,
-      strokeColor: "#f77b7b",
+      strokeColor: "#d400ff",
       strokeOpacity: 0.8,
       strokeStyle: "solid"
     });
