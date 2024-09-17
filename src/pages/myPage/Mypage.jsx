@@ -35,7 +35,6 @@ const Mypage = () => {
     queryKey: ["feeds"],
     queryFn: getFeeds
   });
-  console.log("feeds :>> ", feeds);
 
   const confirmUpdate = () =>
     Swal.fire({
@@ -132,7 +131,7 @@ const Mypage = () => {
         <MyPageHeaderP onClick={confirmUpdate}>내 정보 수정</MyPageHeaderP>
       </MyPageHeader>
       <RideItemList>
-        {feeds ? (
+        {feeds.length ? (
           feeds.map((feed) => {
             return (
               <RideItem key={feed.id}>
@@ -145,6 +144,7 @@ const Mypage = () => {
                         onClick={() =>
                           toggleVisibilityMuation.mutate({ feedId: feed.id, feedVisibility: feed.visibility })
                         }
+                        $isToggle={true}
                       >
                         {feed.visibility ? "비공개로 전환" : "공개로 전환"}
                       </RideItemButton>
@@ -246,4 +246,13 @@ const RideItemButtonWrap = styled.div`
 
 const RideItemButton = styled.button`
   cursor: pointer;
+  background-color: ${({ $isToggle }) => ($isToggle ? "#1b1b1b" : "white")};
+  color: ${({ $isToggle }) => ($isToggle ? "white" : "black")};
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  &:hover {
+    filter: brightness(0.8);
+  }
 `;
