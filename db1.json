@@ -149381,6 +149381,306 @@
           "LINE_YP": 126.445627
         }
       ]
+    },
+    {
+      "id": "4",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "132",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "124",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "162",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "112",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
+    },
+    {
+      "id": "1232",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
+      "visibility": true,
+      "created_time": "2024-09-13 16:00:19",
+      "BICYCLE_PATH": "영산강자전거길",
+      "BOAD_SN": 7,
+      "thumb": 0,
+      "roadLine": [
+        {
+          "road_id": 20613,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371319,
+          "LINE_YP": 127.018144
+        },
+        {
+          "road_id": 20614,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.371318,
+          "LINE_YP": 127.018138
+        },
+        {
+          "road_id": 20615,
+          "ROAD_SN": 7,
+          "LINE_XP": 35.370924,
+          "LINE_YP": 127.018444
+        }
+      ]
     }
   ]
 }

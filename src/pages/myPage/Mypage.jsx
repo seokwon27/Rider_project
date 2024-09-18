@@ -1,9 +1,10 @@
 import axios from "axios";
 import styled from "styled-components";
 import KakaoMap from "../../components/common/KakaoMap";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -20,20 +21,38 @@ const Mypage = () => {
     localStorage.setItem("userId", "내아이디는설하영");
   };
 
-  const getFeeds = async () => {
-    // TODO - 유저아이디 변경필요
+  const getFeedsByPageNum = async ({ queryKey, pageParam = 1 }) => {
     const userId = localStorage.getItem("userId");
-    const response = await axios.get(`http://localhost:4001/feed?userId=${userId}`);
+    const [_, page] = queryKey;
+    const pageToFetch = page ?? pageParam;
+    const response = await axios.get(`http://localhost:4001/feed?_page=${pageToFetch}&_per_page=5&userId=${userId}`);
     return response.data;
   };
 
   const {
     data: feeds,
-    isLoading,
-    isError
-  } = useQuery({
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery({
     queryKey: ["feeds"],
-    queryFn: getFeeds
+    queryFn: getFeedsByPageNum,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.next !== null) {
+        return lastPage.next;
+      }
+    },
+    select: (data) => {
+      return data.pages.map((pageData) => pageData.data).flat();
+    }
+  });
+
+  const { ref } = useInView({
+    threshold: 1,
+    onChange: (inView) => {
+      if (!inView || !hasNextPage || isFetchingNextPage) return;
+      fetchNextPage();
+    }
   });
 
   const confirmUpdate = () =>
@@ -121,8 +140,6 @@ const Mypage = () => {
     onError: (error) => console.log("error :>> ", error)
   });
 
-  if (isLoading) return <>loading...</>;
-
   return (
     <MyPageWrapper>
       <button onClick={testLogin}>로그인</button>
@@ -131,7 +148,7 @@ const Mypage = () => {
         <MyPageHeaderP onClick={confirmUpdate}>내 정보 수정</MyPageHeaderP>
       </MyPageHeader>
       <RideItemList>
-        {feeds.length ? (
+        {feeds?.length ? (
           feeds.map((feed) => {
             return (
               <RideItem key={feed.id}>
@@ -164,6 +181,7 @@ const Mypage = () => {
           <p>등록한 종주점이 없습니다!</p>
         )}
       </RideItemList>
+      <FetchTrigger ref={ref}>fetchTrigger</FetchTrigger>
     </MyPageWrapper>
   );
 };
@@ -255,4 +273,15 @@ const RideItemButton = styled.button`
   &:hover {
     filter: brightness(0.8);
   }
+`;
+
+const TestItem = styled.div`
+  height: 300px;
+  background-color: white;
+`;
+
+const FetchTrigger = styled.div`
+  bottom: 0px;
+  height: 50px;
+  background-color: green;
 `;
