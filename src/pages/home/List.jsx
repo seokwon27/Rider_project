@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Pagination from "./Pagination";
 import { getAmenities } from "../../api/FilterRoadInformation";
 
-const List = ({ filterData }) => {
+const List = ({ filterData, setPolyline }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const PAGE_ITEMS = 5;
   const PAGE_GROUP = 5;
@@ -17,12 +17,15 @@ const List = ({ filterData }) => {
 
   const getRoadPath = async (data) => {
     let result;
-    const bicycle_road = await axios.get("http://localhost:4000/bicycle_road");
-    const amenities = await axios.get("http://localhost:4000/amenities");
+    const bicycle_road = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/bicycle_road`);
+    const amenities = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/amenities`);
     data.ROAD_SN
       ? (result = bicycle_road.data.find((el) => el.ROAD_SN === data.ROAD_SN))
       : (result = amenities.data.find((el) => el.id === data.id));
     console.log(result);
+    if (result.roadLine) {
+      setPolyline(result);
+    }
     return result;
   };
 
