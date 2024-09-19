@@ -31,6 +31,7 @@ const Mypage = () => {
     const response = await axios.get(
       `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageToFetch}&_per_page=5&userId=${userId}`
     );
+    console.log("response :>> ", response);
     return response.data;
   };
 
@@ -48,7 +49,7 @@ const Mypage = () => {
       }
     },
     select: (data) => {
-      return data.pages.map((pageData) => pageData.data).flat();
+      return data.pages.map((pageData) => pageData).flat();
     }
   });
 
@@ -155,6 +156,7 @@ const Mypage = () => {
       <RideItemList>
         {feeds?.length ? (
           feeds.map((feed) => {
+            console.log("feed :>> ", feed);
             return (
               <RideItem key={feed.id}>
                 <RideItemTextWrap>
