@@ -57,7 +57,7 @@ const Layout = ({ user, setUser, children }) => {
           )}
         </div>
       </header>
-      <main className="container mx-auto pt-10">{children}</main>
+      <main className="container x-full mx-auto">{children}</main>
     </div>
   );
 };

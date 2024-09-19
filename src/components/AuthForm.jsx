@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const AuthForm = ({ mode, onSubmit }) => {
-  // 무엇을 formData 에 넣어야 할까요?
   const [formData, setFormData] = useState({
     id: "",
     password: "",
