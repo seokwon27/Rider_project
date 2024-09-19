@@ -48,7 +48,7 @@ const Mypage = () => {
       }
     },
     select: (data) => {
-      return data.pages.map((pageData) => pageData.data).flat();
+      return data.pages.map((pageData) => pageData).flat();
     }
   });
 
