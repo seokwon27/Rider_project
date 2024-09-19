@@ -13,18 +13,18 @@ const Login = ({ setUser }) => {
       const userProfile = await getUserProfile(loginData.accessToken);
       setUser(userProfile);
 
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       alert("로그인에 실패했습니다. 다시 시도해주세요.");
     }
   };
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-20 space-y-10">
+    <div className="w-full flex flex-col items-center justify-center mt-40 space-y-10">
       <h1 className="text-3xl text-center">로그인</h1>
       <AuthForm mode="login" onSubmit={handleLogin} />
       <p className="text-sm">
         계정이 없으신가요?{" "}
-        <Link to="/signup" className="text-gray-400 hover:text-blue-500 underline">
+        <Link to="/signup" className="text-gray-400 hover:text-blue-400 underline">
           회원가입 바로가기
         </Link>
       </p>

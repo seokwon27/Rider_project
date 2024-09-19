@@ -9,8 +9,9 @@ const useUserStore = create(
       clearUser: () => set({ user: null })
     }),
     {
-      name: "user-storage", // localStorage에 저장될 키 이름
-      getStorage: () => localStorage // localStorage 사용
+      name: "user-storage", // persist 설정임 localStorage에 저장될 이름
+      getStorage: () => localStorage // 저장소 지정하는거
+      //localStorage.setItem("user-storage", JSON.stringify(userData));로 상태를 저장하면 된다!
     }
   )
 );

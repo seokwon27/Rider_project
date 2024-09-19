@@ -26,10 +26,13 @@ const Layout = ({ user, setUser, children }) => {
           {user ? <p className="text-white text-lg">{`${user.nickname}님 안녕하세요!`}</p> : null}
         </div>
         {/* 오른쪽 네비게이션 */}
-        <div className="absolute right-6 flex space-x-4 text-sm items-center">
+        <div className="absolute right-10 flex space-x-4 text-sm items-center gap-2">
           {user ? (
             <>
-              <Link to="/feed" className="text-white hover:text-gray-400 mr-4">
+              <Link to="/home" className="text-white hover:text-gray-400 ">
+                지도보기
+              </Link>
+              <Link to="/feed" className="text-white hover:text-gray-400">
                 모아보기
               </Link>
               <Link to="/mypage" className="text-white hover:text-gray-400">
@@ -44,20 +47,23 @@ const Layout = ({ user, setUser, children }) => {
             </>
           ) : (
             <>
-              <Link to="/feed" className="text-white hover:text-gray-400 mr-4">
+              <Link to="/home" className="text-white hover:text-gray-400">
+                지도보기
+              </Link>
+              <Link to="/feed" className="text-white hover:text-gray-400">
                 모아보기
               </Link>
-              <Link to="/login" className="bg-gray-800 text-white font-light py-2 px-5 rounded-full hover:invert">
-                로그인
-              </Link>
-              <Link to="/signup" className="bg-gray-200 text-black font-normal py-2 px-5 rounded-full hover:invert">
+              <Link to="/signup" className="text-gray-400 hover:text-blue-400 underline">
                 회원가입
+              </Link>
+              <Link to="/login" className="bg-white text-gray-800 font-normal py-2 px-5 rounded-full hover:invert">
+                로그인
               </Link>
             </>
           )}
         </div>
       </header>
-      <main className="container x-full mx-auto">{children}</main>
+      <main className="centered-content">{children}</main>
     </div>
   );
 };

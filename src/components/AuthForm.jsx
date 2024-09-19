@@ -20,7 +20,7 @@ const AuthForm = ({ mode, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="w-1/3">
       <input
         type="text"
         name="id"
@@ -65,7 +65,7 @@ const AuthForm = ({ mode, onSubmit }) => {
           required
           className="w-full px-4 py-3 rounded-full text-sm font-normal text-black mt-4
         caret-transparent
-        focus:opacity-90
+        focus:opacity-80
         focus:outline-none 
         focus:ring-1
         focus:ring-blue-500 

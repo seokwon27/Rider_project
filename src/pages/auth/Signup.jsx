@@ -10,23 +10,22 @@ const Signup = () => {
     try {
       const response = await register(formData);
       alert("회원가입에 완료했습니다. 로그인해주세요.");
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
   return (
-    <div>
-      <div>
-        <h1>회원가입</h1>
-        <AuthForm mode="signup" onSubmit={handleSignup} />
-        <div>
-          <p>
-            이미 계정이 있으신가요? <Link to="/login">로그인</Link>
-          </p>
-        </div>
-      </div>
+    <div className="w-full flex flex-col items-center justify-center mt-40 space-y-10">
+      <h1 className="text-3xl text-center">회원가입</h1>
+      <AuthForm mode="signup" onSubmit={handleSignup} />
+      <p className="text-sm">
+        이미 계정이 있으신가요?{" "}
+        <Link to="/login" className="text-gray-400 hover:text-blue-400 underline">
+          로그인 바로가기
+        </Link>
+      </p>
     </div>
   );
 };
