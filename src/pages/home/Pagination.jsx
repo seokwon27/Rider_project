@@ -27,41 +27,86 @@ const Pagination = ({ totalItems, currentPage, setCurrentPage, PAGE_ITEMS, PAGE_
     }
   };
 
+  // 첫 페이지로
+  const handleFirstGroup = () => {
+    setCurrentPage(1);
+  };
+
+  // 마지막 페이지로
+  const handleLastGroup = () => {
+    setCurrentPage(totalPages);
+  };
+
   return (
     <Paging>
-      <button onClick={handlePrevGroup} disabled={startPage === 1}>
-        이전
+      <button className="prev-next" onClick={handleFirstGroup} disabled={startPage < 6}>
+        &lt;&lt;
+      </button>
+      <button className="prev-next" onClick={handlePrevGroup} disabled={startPage === 1}>
+        &lt;
       </button>
       {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
         <button
           key={index + startPage}
           onClick={() => handlePage(index + startPage)}
+          className={currentPage === index + startPage ? "active" : ""}
           disabled={currentPage === index + startPage}
         >
           {index + startPage}
         </button>
       ))}
-      <button onClick={handleNextGroup} disabled={endPage === totalPages}>
-        다음
+      <button className="prev-next" onClick={handleNextGroup} disabled={endPage === totalPages}>
+        &gt;
+      </button>
+      <button className="prev-next" onClick={handleLastGroup} disabled={endPage === totalPages}>
+        &gt;&gt;
       </button>
     </Paging>
   );
 };
 
 const Paging = styled.div`
+  width: 100%;
+  /* max-width: 600px; */
   margin-top: 20px;
   display: flex;
+  justify-content: center;
   gap: 5px;
 
   button {
     padding: 5px 10px;
-    border: 1px solid #ddd;
-    background-color: ${(props) => (props.disabled ? "#ccc" : "white")};
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid ${(props) => (props.disabled ? "#bbb" : "#ddd")};
+    background-color: ${(props) => (props.disabled ? "#6f6f6f !important" : "#fff")};
+    color: ${(props) => (props.disabled ? "#999" : "#333")};
+    border-radius: 5px;
     cursor: pointer;
-
+    box-shadow: ${(props) => (props.disabled ? "none" : "0 2px 5px rgba(0, 0, 0, 0.1)")};
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: ${(props) => (props.disabled ? "#6f6f6f" : "#f9f9f9")};
+      border-color: ${(props) => (props.disabled ? "#bbb" : "#ccc")};
+    }
+    &:active {
+      background-color: ${(props) => (props.disabled ? "#6f6f6f" : "#eee")};
+      box-shadow: ${(props) => (props.disabled ? "none" : "0 2px 3px rgba(0, 0, 0, 0.2)")};
+    }
     &:disabled {
       cursor: not-allowed;
+      background-color: #6f6f6f;
     }
+    &.active {
+      background-color: #000000;
+      color: white;
+      border-color: #ffffff;
+      cursor: default;
+    }
+  }
+
+  button.prev-next {
+    width: 40px;
+    font-size: 18px;
   }
 `;
 

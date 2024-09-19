@@ -30,10 +30,13 @@ const Filter = ({ setFilterData, selectedButton, setSelectedButton, searchValue 
   );
 };
 const FilterButton = styled.button`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
   background-color: transparent;
   color: ${({ $isSelected }) => ($isSelected ? "white" : "gray")};
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 5px 5px;
+  font-size: 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -46,6 +49,7 @@ const FilterButton = styled.button`
 `;
 
 const FilterDiv = styled.div`
+  width: 100%;
   background-color: transparent;
   border: none;
   display: flex;
