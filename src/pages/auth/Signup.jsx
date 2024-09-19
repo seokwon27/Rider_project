@@ -2,11 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm";
 import { register } from "../../api/auth";
-import useUserStore from "../../store/useUserStore";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { setUser } = useUserStore();
 
   const handleSignup = async (formData) => {
     try {

@@ -5,16 +5,13 @@ import useUserStore from "../../store/useUserStore";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUser, setAccessToken } = useUserStore(); // Zustand store에서 setUser 가져오기
+  const { setUser, setAccessToken } = useUserStore();
 
   const handleLogin = async (formData) => {
     try {
       const loginData = await login(formData);
-      // Zustand 상태와 localStorage 모두에 저장
       setAccessToken(loginData.accessToken);
-      localStorage.setItem("accessToken", loginData.accessToken);
-
-      const userProfile = await getUserProfile(loginData.accessToken);
+      const userProfile = await getUserProfile();
       setUser(userProfile);
 
       navigate("/home");

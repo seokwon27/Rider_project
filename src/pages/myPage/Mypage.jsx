@@ -5,23 +5,22 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import KakaoMap from "../../components/common/KakaoMap";
+import useUserStore from "../../store/useUserStore";
+import authInstance from "../../axiosInstance/Auth";
+import { getUserProfile } from "../../api/auth";
 
 const Mypage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { user } = useUserStore();
 
-  const mockUserId = "내아이디는설하영";
+  const testLogin = async (userData) => {
+    const response = await authInstance.post("/login", userData);
+    const { setUser, setAccessToken } = useUserStore.getState();
+    setAccessToken(response.data.accessToken);
 
-  //TODO - 프로필 수정을 위한 테스트로그인 함수입니다.
-  const testLogin = async () => {
-    //NOTE - 추후 zustand완성 시 필요없는 코드이므로 baseurl env설정하지 않았습니다.
-    const response = await axios.post("https://moneyfulpublicpolicy.co.kr/login", {
-      id: "test13312123",
-      password: "test13312123"
-    });
-    localStorage.setItem("accessToken", response?.data?.accessToken);
-    //TODO - 추후 유저정보관련 zustand 완성 시 유저id가져오는 방식을 변경할 예정입니다.
-    localStorage.setItem("userId", "내아이디는설하영");
+    const userProfile = await getUserProfile(response.data.accessToken);
+    setUser(userProfile);
   };
 
   const getFeedsByPageNum = async ({ pageParam = 1 }) => {
@@ -60,8 +59,7 @@ const Mypage = () => {
       title: "닉네임 변경",
       input: "text",
       inputAttributes: {
-        // TODO - 이전닉 변경필요
-        placeholder: `이전 닉네임: dlwjsslrspdla`
+        placeholder: `이전 닉네임: ${user.nickname}`
       },
       showCancelButton: true,
       confirmButtonText: "확인",
@@ -154,7 +152,7 @@ const Mypage = () => {
                 <RideItemTextWrap>
                   <RideItemTitle>{feed.BICYCLE_PATH}</RideItemTitle>
                   <RideItemDate>최종 종주 일자 : {feed.created_time.split(" ")[0]}</RideItemDate>
-                  {mockUserId == feed.userId ? (
+                  {user == feed.userId ? (
                     <RideItemButtonWrap>
                       <RideItemButton
                         onClick={() =>
