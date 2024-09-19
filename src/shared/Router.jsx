@@ -1,13 +1,33 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Layout from "../components/Layout";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
 import Home from "../pages/home/Home";
+import Mypage from "../pages/myPage/Mypage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
+  const [user, setUser] = useState(null);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <Layout user={user} setUser={setUser}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/mypage"
+            element={
+              <ProtectedRoute user={user}>
+                <Mypage user={user} setUser={setUser} />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Layout>
+    </Router>
   );
 };
 
