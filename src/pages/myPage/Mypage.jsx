@@ -1,10 +1,10 @@
 import axios from "axios";
 import styled from "styled-components";
-import KakaoMap from "../../components/common/KakaoMap";
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import KakaoMap from "../../components/common/KakaoMap";
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -12,12 +12,15 @@ const Mypage = () => {
 
   const mockUserId = "내아이디는설하영";
 
+  //TODO - 프로필 수정을 위한 테스트로그인 함수입니다.
   const testLogin = async () => {
+    //NOTE - 추후 zustand완성 시 필요없는 코드이므로 baseurl env설정하지 않았습니다.
     const response = await axios.post("https://moneyfulpublicpolicy.co.kr/login", {
       id: "test13312123",
       password: "test13312123"
     });
     localStorage.setItem("accessToken", response?.data?.accessToken);
+    //TODO - 추후 유저정보관련 zustand 완성 시 유저id가져오는 방식을 변경할 예정입니다.
     localStorage.setItem("userId", "내아이디는설하영");
   };
 
@@ -25,7 +28,9 @@ const Mypage = () => {
     const userId = localStorage.getItem("userId");
     const [_, page] = queryKey;
     const pageToFetch = page ?? pageParam;
-    const response = await axios.get(`http://localhost:4001/feed?_page=${pageToFetch}&_per_page=5&userId=${userId}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageToFetch}&_per_page=5&userId=${userId}`
+    );
     return response.data;
   };
 
