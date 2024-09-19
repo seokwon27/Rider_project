@@ -64,6 +64,7 @@ const List = ({ filterData }) => {
       });
     };
     getAllRoadData();
+    setCurrentPage(1);
   }, [filterData]);
 
   return (

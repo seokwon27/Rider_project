@@ -4,7 +4,8 @@ import Filter from "./Filter";
 import { getFilterRoad } from "../../api/FilterRoadInformation";
 import Search from "./Search";
 import List from "./List";
-import { Map } from "react-kakao-maps-sdk";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import useGeoLocation from "../../hooks/useGeoLocation";
 
 const Home = () => {
   const [filterData, setFilterData] = useState([]);
@@ -12,6 +13,10 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
 
   // console.log(filterData);
+
+  //현위치
+  const location = useGeoLocation();
+  console.log(location);
 
   useEffect(() => {
     const getAllRoadData = async () => {
@@ -49,16 +54,15 @@ const Home = () => {
       <MapContainer>
         <Map
           id="map"
-          center={{
-            lat: 33.450701,
-            lng: 126.570667
-          }}
+          center={location.center}
           style={{
             width: "100%",
             height: "100%"
           }}
           level={3}
-        />
+        >
+          <MapMarker position={location.center} />
+        </Map>
       </MapContainer>
     </Container>
   );
