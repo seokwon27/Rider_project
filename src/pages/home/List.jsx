@@ -28,7 +28,7 @@ const List = ({ filterData }) => {
 
   useEffect(() => {
     const getAllRoadData = async () => {
-      for (const item of filterData) {
+      for (const item of currentItems) {
         if (item.id && !address[item.id]) {
           // 이미 주소가 있으면 요청하지 않도록 조건 추가
           try {
@@ -49,11 +49,11 @@ const List = ({ filterData }) => {
 
     const getAddressFromCoords = (lat, lng, id) => {
       const geocoder = new window.kakao.maps.services.Geocoder();
-      const coords = new window.kakao.maps.LatLng(lat, lng);
+      // const coords = new window.kakao.maps.LatLng(lat, lng);
 
       geocoder.coord2Address(lng, lat, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          const addr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+          const addr = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
 
           // address 상태에 병합된 데이터의 주소를 저장
           setAddress((prev) => ({
@@ -64,6 +64,9 @@ const List = ({ filterData }) => {
       });
     };
     getAllRoadData();
+  }, [filterData, currentPage]);
+
+  useEffect(() => {
     setCurrentPage(1);
   }, [filterData]);
 
