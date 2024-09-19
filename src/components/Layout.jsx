@@ -1,11 +1,11 @@
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import homeIcon from "../assets/homeIcon.svg";
+import useUserStore from "../store/useUserStore";
 
-const Layout = ({ user, setUser, children }) => {
+const Layout = ({ children }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  const { user, setUser } = useUserStore(); // Zustand store 사용
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");

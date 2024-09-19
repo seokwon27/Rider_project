@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm";
 import { getUserProfile, login } from "../../api/auth";
+import useUserStore from "../../store/useUserStore";
 
-const Login = ({ setUser }) => {
+const Login = () => {
   const navigate = useNavigate();
+  const { setUser, setAccessToken } = useUserStore(); // Zustand store에서 setUser 가져오기
+
   const handleLogin = async (formData) => {
     try {
       const loginData = await login(formData);
+      // Zustand 상태와 localStorage 모두에 저장
+      setAccessToken(loginData.accessToken);
       localStorage.setItem("accessToken", loginData.accessToken);
 
       const userProfile = await getUserProfile(loginData.accessToken);

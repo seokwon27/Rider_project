@@ -2,15 +2,17 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm";
 import { register } from "../../api/auth";
+import useUserStore from "../../store/useUserStore";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { setUser } = useUserStore();
 
   const handleSignup = async (formData) => {
     try {
       const response = await register(formData);
       alert("회원가입에 완료했습니다. 로그인해주세요.");
-      navigate("/home");
+      navigate("/login");
     } catch (error) {
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
     }

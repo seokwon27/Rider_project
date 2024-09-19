@@ -5,13 +5,14 @@ const useUserStore = create(
   persist(
     (set) => ({
       user: null,
+      accessToken: null,
       setUser: (userData) => set({ user: userData }),
-      clearUser: () => set({ user: null })
+      setAccessToken: (token) => set({ accessToken: token }),
+      clearUser: () => set({ user: null, accessToken: null })
     }),
     {
-      name: "user-storage", // persist 설정임 localStorage에 저장될 이름
-      getStorage: () => localStorage // 저장소 지정하는거
-      //localStorage.setItem("user-storage", JSON.stringify(userData));로 상태를 저장하면 된다!
+      name: "user-storage",
+      getStorage: () => localStorage
     }
   )
 );
