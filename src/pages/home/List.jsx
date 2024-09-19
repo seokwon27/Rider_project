@@ -29,7 +29,6 @@ const List = ({ filterData }) => {
   useEffect(() => {
     const getAllRoadData = async () => {
       for (const item of currentItems) {
-      for (const item of currentItems) {
         if (item.id && !address[item.id]) {
           // 이미 주소가 있으면 요청하지 않도록 조건 추가
           try {
@@ -66,8 +65,7 @@ const List = ({ filterData }) => {
     getAllRoadData();
   }, [filterData, currentPage]);
 
-  useEffect(() => {
-  }, [filterData, currentPage]);
+  useEffect(() => {}, [filterData, currentPage]);
 
   useEffect(() => {
     setCurrentPage(1);
