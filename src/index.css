@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-caret {
-  @components caret-red-500;
-}
-
 :root {
   background-color: #121212;
   color: white;

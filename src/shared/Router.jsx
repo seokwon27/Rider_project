@@ -17,17 +17,17 @@ const Router = () => {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
-          {/* <Route path="/signup" element={<Signup />} /> */}
+          <Route path="/signup" element={<Signup />} />
           <Route path="/feed" element={<Feed setUser={setUser} />} />
 
-          {/* <Route
-          path="/mypage"
-          element={
-            <ProtectedRoute user={user}>
-              <Mypage user={user} setUser={setUser} />
-            </ProtectedRoute>
-          }
-        /> */}
+          <Route
+            path="/mypage"
+            element={
+              <ProtectedRoute user={user}>
+                <Mypage user={user} setUser={setUser} />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Layout>
     </BrowserRouter>
