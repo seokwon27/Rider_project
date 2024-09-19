@@ -24,12 +24,10 @@ const Mypage = () => {
     localStorage.setItem("userId", "내아이디는설하영");
   };
 
-  const getFeedsByPageNum = async ({ queryKey, pageParam = 1 }) => {
+  const getFeedsByPageNum = async ({ pageParam = 1 }) => {
     const userId = localStorage.getItem("userId");
-    const [_, page] = queryKey;
-    const pageToFetch = page ?? pageParam;
     const response = await axios.get(
-      `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageToFetch}&_per_page=5&userId=${userId}`
+      `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageParam}&_limit=5&userId=${userId}`
     );
     console.log("response :>> ", response);
     return response.data;
@@ -43,14 +41,10 @@ const Mypage = () => {
   } = useInfiniteQuery({
     queryKey: ["feeds"],
     queryFn: getFeedsByPageNum,
-    getNextPageParam: (lastPage) => {
-      if (lastPage.next !== null) {
-        return lastPage.next;
-      }
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.length === 5 ? pages.length + 1 : undefined;
     },
-    select: (data) => {
-      return data.pages.map((pageData) => pageData).flat();
-    }
+    select: (data) => data.pages.flat()
   });
 
   const { ref } = useInView({
@@ -188,7 +182,7 @@ const Mypage = () => {
           <p>등록한 종주점이 없습니다!</p>
         )}
       </RideItemList>
-      <FetchTrigger ref={ref}>fetchTrigger</FetchTrigger>
+      <FetchTrigger ref={ref} />
     </MyPageWrapper>
   );
 };
@@ -282,13 +276,7 @@ const RideItemButton = styled.button`
   }
 `;
 
-const TestItem = styled.div`
-  height: 300px;
-  background-color: white;
-`;
-
 const FetchTrigger = styled.div`
   bottom: 0px;
   height: 50px;
-  background-color: green;
 `;
