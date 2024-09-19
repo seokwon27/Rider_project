@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "feed-server": "json-server --watch db1.json --port 4001"
+    "pathInfo": "json-server --watch db.json --port 4000",
+    "feed": "json-server --watch db1.json --port 4001",
+    "roadInfo": "json-server --watch db2.json --port 4002"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -22,6 +24,7 @@
     "json-server": "0.17.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-kakao-maps-sdk": "^1.1.27",
     "react-intersection-observer": "^9.13.1",
     "react-router-dom": "^6.26.2",
     "styled-components": "^6.1.13",
