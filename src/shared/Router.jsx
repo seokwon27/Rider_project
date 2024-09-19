@@ -5,7 +5,6 @@ import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 import Home from "../pages/home/Home";
 import Mypage from "../pages/myPage/Mypage";
-import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
   const [user, setUser] = useState(null);
@@ -30,5 +29,4 @@ const Router = () => {
     </Router>
   );
 };
-
 export default Router;
