@@ -13,10 +13,18 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const [polyline, setPolyline] = useState({ roadLine: [] });
   const [totalDistance, setTotalDistance] = useState(0);
+  const [positions, setPositions] = useState([]);
+  const [centerCoord, setCenterCoord] = useState(null);
+  const [amenityDatas, setAmenityDatas] = useState([]);
+  console.log("amenityDatas =>", amenityDatas);
+
   // console.log(filterData);
   //현위치
   const location = useGeoLocation();
-  console.log(location);
+  // useEffect(() => {
+  //   setCenterCoord(location.center);
+  // }, []);
+  // console.log(location);
 
   useEffect(() => {
     const getAllRoadData = async () => {
@@ -82,12 +90,23 @@ const Home = () => {
             setSelectedButton={setSelectedButton}
             searchValue={searchValue}
           />
-          <List filterData={filterData} setPolyline={setPolyline} />
+          <List
+            filterData={filterData}
+            setPolyline={setPolyline}
+            setPositions={setPositions} //마커 좌표
+            setCenterCoord={setCenterCoord} // 지도 중앙좌표 이건 없어져도 되는느낌
+            setAmenityDatas={setAmenityDatas} // 경로 편의시설 데이터
+          />
         </SearchFilterDiv>
 
         <MapContainer>
           {polyline.roadLine.length === 0 ? (
-            <Map id="map" center={location.center} style={{ width: "100%", height: "100%" }} level={3}>
+            <Map
+              id="map"
+              center={centerCoord ? centerCoord : location.center}
+              style={{ width: "100%", height: "100%" }}
+              level={3}
+            >
               <MapMarker
                 position={location.center}
                 image={{
@@ -96,6 +115,22 @@ const Home = () => {
                   options: { offset: { x: 27, y: 69 } }
                 }}
               />
+              {positions.map((position, index) => {
+                return (
+                  <MapMarker
+                    key={`${position.title}-${position.latlng.lat}-${position.latlng.lng}`}
+                    position={position.latlng}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      size: {
+                        width: 24,
+                        height: 35
+                      } // 마커이미지의 크기입니다
+                    }}
+                    title={position.title}
+                  />
+                );
+              })}
               <CustomOverlayMap position={location.center} yAnchor={1}>
                 <CustomOverlay>
                   <span className="title">현재 위치</span>
@@ -176,6 +211,22 @@ const Home = () => {
                 strokeOpacity={0.7}
                 strokeStyle={"solid"}
               />
+              {amenityDatas.map((position, index) => {
+                return (
+                  <MapMarker
+                    key={`${position.name}${position.id}-${position.latitude}-${position.longitude}`}
+                    position={{ lat: position.latitude, lng: position.longitude }}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      size: {
+                        width: 24,
+                        height: 35
+                      } // 마커이미지의 크기입니다
+                    }}
+                    title={position.name}
+                  />
+                );
+              })}
             </Map>
           )}
         </MapContainer>
