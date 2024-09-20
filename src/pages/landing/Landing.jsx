@@ -1,11 +1,23 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import landing_background from "../../assets/landing_background.png";
 import downScroll from "../../assets/downScroll.png";
+import landing_firstIcon from "../../assets/landing_firstIcon.png";
+import landing_firstImg from "../../assets/landing_firstImg.png";
+import landing_secondIcon from "../../assets/landing_secondIcon.png";
+import landing_secondImg from "../../assets/landing_secondImg.png";
 
 const Landing = () => {
+  const targetRef = useRef();
+  const navigate = useNavigate();
   const [weatherIconURL, setWeatherIconURL] = useState("");
+
+  const scrollToTargetRef = () => {
+    targetRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const getWeather = async (lat, lon) => {
       const response = await axios.get(
@@ -39,7 +51,7 @@ const Landing = () => {
 
   return (
     <LandingWrapper $image={landing_background}>
-      <section>
+      <TopSection>
         <LandingTop>
           <p>
             <span>오늘 [</span>
@@ -49,68 +61,28 @@ const Landing = () => {
           <p>
             <span>[RIDERS] 어때? 🚴</span>
           </p>
-          <RedirectButton>바로가기</RedirectButton>
-          <DownScrollButton>
+          <RedirectButton onClick={() => navigate("/home")}>바로가기</RedirectButton>
+          <DownScrollButton onClick={scrollToTargetRef}>
             <img src={downScroll} />
           </DownScrollButton>
         </LandingTop>
+      </TopSection>
+      <section ref={targetRef}>
+        <LandingItemWrapper>
+          <img src={landing_firstIcon} />
+          <h3>지도로 자전거 길을 볼 수 있습니다.</h3>
+          <p>원하는 자전거길을 볼 수 있습니다.에 대한 설명</p>
+          <LandingPageImg src={landing_firstImg} />
+        </LandingItemWrapper>
       </section>
-
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
+      <section>
+        <LandingItemWrapper>
+          <img src={landing_secondIcon} />
+          <h3>내가 간 곳을 모아볼 수 있습니다.</h3>
+          <p>내 게시물을 모아볼 수 있습니다.에 대한 설명</p>
+          <LandingPageImg src={landing_secondImg} />
+        </LandingItemWrapper>
+      </section>
     </LandingWrapper>
   );
 };
@@ -129,7 +101,7 @@ const LandingWrapper = styled.div`
       rgba(0, 0, 0, 1) 100%
     ),
     url(${(props) => props.$image});
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: contain;
   background-position: top;
   min-height: 100vh;
@@ -137,6 +109,11 @@ const LandingWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 30px 0px;
+  gap: 100px;
+`;
+
+const TopSection = styled.section`
+  margin-bottom: 400px;
 `;
 
 const LandingTop = styled.div`
@@ -146,7 +123,7 @@ const LandingTop = styled.div`
   font-size: 50px;
   font-weight: bold;
   color: white;
-  gap: 30px;
+  gap: 50px;
   p {
     display: flex;
     flex-direction: row;
@@ -164,7 +141,9 @@ const RedirectButton = styled.button`
   border-radius: 20px;
   width: 150px;
   padding: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
   &:hover {
+    transform: translateY(-5px);
     box-shadow: rgba(255, 255, 255, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
   }
 `;
@@ -173,4 +152,31 @@ const DownScrollButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-5px);
+  }
+`;
+
+const LandingItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 10px;
+  h3 {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  p {
+    font-size: 16px;
+    color: #d6d6d6;
+  }
+`;
+
+const LandingPageImg = styled.img`
+  object-fit: fill;
+  width: 980px;
+  height: 500px;
 `;
