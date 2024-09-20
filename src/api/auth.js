@@ -1,4 +1,3 @@
-import axios from "axios";
 import useUserStore from "../store/useUserStore";
 import authInstance from "../axiosInstance/Auth";
 
@@ -17,7 +16,6 @@ export const login = async (userData) => {
   return response.data;
 };
 
-// 어떤 user의 게시물을 가져올건지? token과 비교를 해서 가져오는 로직
 export const getUserProfile = async () => {
   const { accessToken } = useUserStore.getState();
   const response = await authInstance.get("/user", {
@@ -28,7 +26,6 @@ export const getUserProfile = async () => {
   return response.data;
 };
 
-// 프로필의 닉넴을 변경하는 로직
 export const updateProfile = async (formData) => {
   const { accessToken } = useUserStore.getState();
 

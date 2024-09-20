@@ -22,7 +22,7 @@ const Signup = () => {
       <AuthForm mode="signup" onSubmit={handleSignup} />
       <p className="text-sm">
         이미 계정이 있으신가요?{" "}
-        <Link to="/login" className="text-gray-400 hover:text-blue-400 underline">
+        <Link to="/login" className="text-gray-400 hover:text-blue-400 underline underline-offset-4">
           로그인 바로가기
         </Link>
       </p>

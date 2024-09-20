@@ -5,7 +5,7 @@ import useUserStore from "../store/useUserStore";
 const Layout = ({ children }) => {
   const navigate = useNavigate();
 
-  const { user, setUser } = useUserStore(); // Zustand store 사용
+  const { user, setUser } = useUserStore();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -15,17 +15,14 @@ const Layout = ({ children }) => {
   return (
     <div>
       <header className="py-9 px-10 bg-black flex items-center">
-        {/* 왼쪽 네비게이션 */}
         <div className="absolute left-10 flex items-center">
           <Link to="/" className="text-white hover:text-gray-400">
             <img src={homeIcon} alt="Home" className="w-30" />
           </Link>
         </div>
-        {/* 가운데 메시지 */}
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center">
           {user ? <p className="text-white text-lg">{`${user.nickname}님 안녕하세요!`}</p> : null}
         </div>
-        {/* 오른쪽 네비게이션 */}
         <div className="absolute right-10 flex space-x-4 text-sm items-center gap-2">
           {user ? (
             <>
