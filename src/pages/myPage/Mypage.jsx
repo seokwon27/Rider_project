@@ -19,6 +19,7 @@ const Mypage = () => {
     const response = await axios.get(
       `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageParam}&_limit=5&userId=${userId}`
     );
+    console.log("response :>> ", response);
     return response.data;
   };
 
@@ -147,12 +148,13 @@ const Mypage = () => {
       <RideItemList>
         {feeds?.length ? (
           feeds.map((feed) => {
+            console.log("feed :>> ", feed);
             return (
               <RideItem key={feed.id}>
                 <RideItemTextWrap>
                   <RideItemTitle>{feed.BICYCLE_PATH}</RideItemTitle>
                   <RideItemDate>최종 종주 일자 : {feed.created_time.split(" ")[0]}</RideItemDate>
-                  {user == feed.userId ? (
+                  {user.id == feed.userId ? (
                     <RideItemButtonWrap>
                       <RideItemButton
                         onClick={() =>

@@ -1,10 +1,10 @@
 {
   "feed": [
     {
-      "userId": "내아이디는설하영",
-      "nickname": "내이름은 설하영",
+      "nickname": "나는 T100 이다",
+      "profile_img": "https://cdn.bicyclelife.net/news/photo/201808/1520_9796_3830.jpg",
       "visibility": true,
-      "created_time": "2024-09-20 12:55:20",
+      "created_time": "2024-09-20 20:33:18",
       "BICYCLE_PATH": "아라자전거길",
       "ROAD_SN": 1,
       "thumb": [],
@@ -719,6 +719,8 @@
         }
       ],
       "id": 1
+<<<<<<< HEAD
+=======
     },
     {
       "userId": "내아이디는설하영",
@@ -79843,6 +79845,7 @@
         }
       ],
       "id": 9
+>>>>>>> e8794d9545141dd2241e91a089291843d7cfc250
     }
   ]
 }

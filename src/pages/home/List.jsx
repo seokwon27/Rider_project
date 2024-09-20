@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Pagination from "./Pagination";
 import { getAmenities } from "../../api/FilterRoadInformation";
 
-const List = ({ filterData }) => {
+const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCenterCoord }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const PAGE_ITEMS = 5;
   const PAGE_GROUP = 5;
@@ -14,18 +14,48 @@ const List = ({ filterData }) => {
   const indexOfLastItem = currentPage * PAGE_ITEMS;
   const indexOfFirstItem = indexOfLastItem - PAGE_ITEMS;
   const currentItems = filterData.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log("currentItems =>", currentItems);
 
   const getRoadPath = async (data) => {
     let result;
-    const bicycle_road = await axios.get("http://localhost:4000/bicycle_road");
-    const amenities = await axios.get("http://localhost:4000/amenities");
+    const bicycle_road = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/bicycle_road`);
+    const amenities = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/amenities`);
     data.ROAD_SN
       ? (result = bicycle_road.data.find((el) => el.ROAD_SN === data.ROAD_SN))
       : (result = amenities.data.find((el) => el.id === data.id));
-    console.log(result);
+    // console.log(result);
+    if (result.roadLine) {
+      setPolyline(result);
+      const name = await result.BICYCLE_PATH.slice(0, 2);
+      const amenitiesData = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/amenities?name_like=${name}`);
+      console.log(name);
+
+      setAmenityDatas(amenitiesData.data);
+    }
     return result;
   };
 
+  //현재결과 좌표 positions state에 저장
+  useEffect(() => {
+    const fetchCurrentItems = async () => {
+      const result = await Promise.all(
+        currentItems
+          .filter((el) => {
+            return !el.BICYCLE_PATH;
+          })
+          .map((el) => getRoadPath(el))
+      );
+
+      const marker = result.map((el) => {
+        return { title: el.Classification, latlng: { lat: el.latitude, lng: el.longitude } };
+      });
+      setPositions(marker);
+    };
+
+    fetchCurrentItems();
+  }, [filterData, currentPage]);
+
+  //주소값 할당하기
   useEffect(() => {
     const getAllRoadData = async () => {
       for (const item of currentItems) {
@@ -49,7 +79,6 @@ const List = ({ filterData }) => {
 
     const getAddressFromCoords = (lat, lng, id) => {
       const geocoder = new window.kakao.maps.services.Geocoder();
-      // const coords = new window.kakao.maps.LatLng(lat, lng);
 
       geocoder.coord2Address(lng, lat, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
@@ -66,9 +95,16 @@ const List = ({ filterData }) => {
     getAllRoadData();
   }, [filterData, currentPage]);
 
+  useEffect(() => {}, [filterData, currentPage]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [filterData]);
+
+  const getCoord = async (data) => {
+    const result = await getRoadPath(data);
+    setCenterCoord({ lat: result.latitude, lng: result.longitude });
+  };
 
   return (
     <>
@@ -79,7 +115,8 @@ const List = ({ filterData }) => {
             <Card
               key={index}
               onClick={() => {
-                getRoadPath(data);
+                // getRoadPath(data);
+                getCoord(data);
               }}
             >
               {data.name ? (
@@ -169,17 +206,20 @@ const Card = styled.div`
 `;
 
 const CardText = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 14px;
 `;
 
 const CardTitle = styled.p`
+  width: 100%;
   font-size: 18px;
   font-weight: 600;
 `;
 
 const CardRoad = styled.p`
+  width: 100%;
   color: #bcbcbc;
 `;
 
