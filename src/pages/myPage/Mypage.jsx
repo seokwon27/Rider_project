@@ -136,6 +136,7 @@ const Mypage = () => {
             // 로그인 만료 처리
             Swal.fire({
               icon: "error",
+
               title: `로그인 만료\n다시 로그인해주세요!`,
               showConfirmButton: false,
               timer: 1500
