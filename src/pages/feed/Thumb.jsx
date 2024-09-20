@@ -12,7 +12,6 @@ const Thumb = ({ currentFeedId, currentThumb }) => {
   const { user } = useUserStore();
 
   const isUserLiked = currentThumb.some((el) => el == user.id);
-  console.log("isUserLiked :>> ", isUserLiked);
   const thumbCount = currentThumb.length;
 
   const updateThumb = async (feedId) => {
