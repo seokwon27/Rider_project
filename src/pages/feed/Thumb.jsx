@@ -11,7 +11,7 @@ const Thumb = ({ currentFeedId, currentThumb }) => {
 
   const { user } = useUserStore();
 
-  const isUserLiked = currentThumb.some((el) => el == user.id);
+  const isUserLiked = currentThumb.some((el) => el == user?.id);
   const thumbCount = currentThumb.length;
 
   const updateThumb = async (feedId) => {
@@ -28,7 +28,7 @@ const Thumb = ({ currentFeedId, currentThumb }) => {
 
   return (
     <div>
-      <Button onClick={() => addThumb(currentFeedId)}>
+      <Button onClick={() => addThumb(currentFeedId)} disabled={isUserLiked ? false : true}>
         {isUserLiked ? <FontAwesomeIcon icon={solidThumb} /> : <FontAwesomeIcon icon={regularThumb} />}
       </Button>
       {thumbCount}
