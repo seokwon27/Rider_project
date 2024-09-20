@@ -22,7 +22,7 @@ const List = ({ filterData, setPolyline }) => {
     data.ROAD_SN
       ? (result = bicycle_road.data.find((el) => el.ROAD_SN === data.ROAD_SN))
       : (result = amenities.data.find((el) => el.id === data.id));
-    console.log(result);
+    // console.log(result);
     if (result.roadLine) {
       setPolyline(result);
     }
@@ -173,17 +173,20 @@ const Card = styled.div`
 `;
 
 const CardText = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 14px;
 `;
 
 const CardTitle = styled.p`
+  width: 100%;
   font-size: 18px;
   font-weight: 600;
 `;
 
 const CardRoad = styled.p`
+  width: 100%;
   color: #bcbcbc;
 `;
 

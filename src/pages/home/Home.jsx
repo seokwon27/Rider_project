@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Filter from "./Filter";
 import { getFilterRoad } from "../../api/FilterRoadInformation";
@@ -6,6 +6,9 @@ import Search from "./Search";
 import List from "./List";
 import { CustomOverlayMap, Map, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import useGeoLocation from "../../hooks/useGeoLocation";
+import useInsertFeed from "../../hooks/useInsertFeed";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [filterData, setFilterData] = useState([]);
@@ -13,10 +16,16 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const [polyline, setPolyline] = useState({ roadLine: [] });
   const [totalDistance, setTotalDistance] = useState(0);
+  const [mapCenter, setMapCenter] = useState({});
+
+  const { mutate: insertFeed, isLoading, isError } = useInsertFeed();
+
+  const navigate = useNavigate();
+  // console.log(mapCenter);
   // console.log(filterData);
   //현위치
   const location = useGeoLocation();
-  console.log(location);
+  // console.log(location);
 
   useEffect(() => {
     const getAllRoadData = async () => {
@@ -32,7 +41,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(polyline);
+    // console.log(polyline);
     if (polyline?.roadLine?.length > 0) {
       const haversineDistance = (coords1, coords2) => {
         const toRad = (value) => (value * Math.PI) / 180;
@@ -60,9 +69,61 @@ const Home = () => {
 
       const totalDistance = calculateTotalDistance(polyline.roadLine);
       setTotalDistance(totalDistance);
-      console.log("총 거리:", totalDistance, "km");
+      // console.log("총 거리:", totalDistance, "km");
     }
   }, [polyline]);
+
+  // 버튼 클릭 시 현재 위치로 지도 중심 이동
+  // polyline의 첫 번째 좌표가 변경되면 mapCenter를 업데이트
+  useEffect(() => {
+    if (polyline?.roadLine?.length > 0) {
+      setMapCenter({ lat: polyline.roadLine[0].LINE_XP, lng: polyline.roadLine[0].LINE_YP });
+    }
+  }, [polyline]);
+
+  // 버튼 클릭 시 현재 위치로 지도 중심 이동
+  const handleCurrentLocation = () => {
+    setMapCenter(location.center); // 현재 위치를 지도 중심으로 설정
+  };
+
+  const handleInsertFeed = () => {
+    insertFeed(polyline, {
+      onSuccess: () => {
+        Swal.fire({
+          imageUrl: "/public/finishImg.png",
+          imageWidth: 180,
+          imageHeight: 100,
+          title: `
+          ${polyline.BICYCLE_PATH}
+          <br />
+          종주점 찍기 완료`,
+          showConfirmButton: true,
+          showCancelButton: true,
+          confirmButtonText: "피드 보러가기",
+          cancelButtonText: "취소"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/feed");
+          }
+        });
+      },
+      onError: (err) => {
+        if (err.message === "이미 종주점을 찍었습니다.") {
+          Swal.fire({
+            title: "이미 종주점을 찍었습니다.",
+            confirmButtonText: "확인"
+          });
+        } else {
+          Swal.fire({
+            title: "오류 발생",
+            text: "종주점을 저장하는 중 오류가 발생했습니다.",
+            icon: "error",
+            confirmButtonText: "확인"
+          });
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -87,7 +148,12 @@ const Home = () => {
 
         <MapContainer>
           {polyline.roadLine.length === 0 ? (
-            <Map id="map" center={location.center} style={{ width: "100%", height: "100%" }} level={3}>
+            <Map
+              id="map"
+              center={mapCenter.lat ? mapCenter : location.center}
+              style={{ width: "100%", height: "100%" }}
+              level={polyline.roadLine.length > 0 ? 8 : 3}
+            >
               <MapMarker
                 position={location.center}
                 image={{
@@ -105,9 +171,9 @@ const Home = () => {
           ) : (
             <Map
               id="map"
-              center={{ lat: polyline.roadLine[0].LINE_XP, lng: polyline.roadLine[0].LINE_YP }}
+              center={mapCenter.lat ? mapCenter : location.center}
               style={{ width: "100%", height: "100%" }}
-              level={8}
+              level={polyline.roadLine.length > 0 ? 8 : 3}
             >
               <MapMarker
                 position={location.center}
@@ -130,6 +196,7 @@ const Home = () => {
                   options: { offset: { x: 27, y: 69 } }
                 }}
               />
+
               <CustomOverlayMap
                 position={{
                   lat: polyline.roadLine[0].LINE_XP,
@@ -141,6 +208,7 @@ const Home = () => {
                   <span className="title">{polyline.BICYCLE_PATH} &nbsp; 0km</span>
                 </CustomOverlay>
               </CustomOverlayMap>
+
               <MapMarker
                 position={{
                   lat: polyline.roadLine[polyline.roadLine.length - 1].LINE_XP,
@@ -152,6 +220,7 @@ const Home = () => {
                   options: { offset: { x: 27, y: 69 } }
                 }}
               />
+
               <CustomOverlayMap
                 position={{
                   lat: polyline.roadLine[polyline.roadLine.length - 1].LINE_XP,
@@ -162,7 +231,10 @@ const Home = () => {
                 <CustomOverlay>
                   <span className="title">
                     {polyline.BICYCLE_PATH} &nbsp;
-                    {totalDistance}km
+                    {totalDistance}km <br />
+                    <FeedButton onClick={() => handleInsertFeed()}>
+                      {isLoading ? "저장 중..." : "종주점 찍기"}
+                    </FeedButton>
                   </span>
                 </CustomOverlay>
               </CustomOverlayMap>
@@ -181,12 +253,30 @@ const Home = () => {
         </MapContainer>
       </Container>
       <CurrentLocation>
-        <CurrentLocationImg src="/public/currentLocation.png" alt="location" />
+        <CurrentLocationButton onClick={() => handleCurrentLocation()}>
+          <CurrentLocationImg src="/public/currentLocation.png" alt="location" />
+        </CurrentLocationButton>
       </CurrentLocation>
     </>
   );
 };
 
+const FeedButton = styled.button`
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+`;
+
+const CurrentLocationButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
 const CurrentLocationImg = styled.img`
   width: 50px;
   height: 50px;
@@ -199,9 +289,13 @@ const CurrentLocation = styled.div`
 `;
 
 const Container = styled.div`
+  background-color: #121212;
+  min-height: 100vh;
   display: flex;
-  gap: 20px;
+  /* gap: 20px; */
   width: 100%;
+  height: 100%;
+  /* height: 70%; */
   /* margin: 20px auto; */
   /* padding: 20px; */
 `;
@@ -210,7 +304,7 @@ const Title = styled.div`
   color: #ffffff;
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-top: 10px;
   text-align: left;
   width: 100%;
@@ -220,7 +314,10 @@ const SearchFilterDiv = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
+  max-height: 100%;
+  min-height: 100vh;
   width: 23%;
+  /* height: 100%; */
   border-radius: 10px;
   background: linear-gradient(180deg, #667386 0%, #030303 100%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -228,27 +325,29 @@ const SearchFilterDiv = styled.div`
 `;
 
 const MapContainer = styled.div`
-  width: 74%;
-  height: 960px;
+  width: 76%;
+  height: 960vh;
+  max-height: 960px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const CustomOverlay = styled.div`
   position: relative;
   bottom: 85px;
-  border-radius: 6px;
+  border-radius: 20px;
   border: 1px solid #ccc;
   border-bottom: 2px solid #ddd;
   float: left;
 
   &:nth-of-type(n) {
     border: 0;
-    box-shadow: 0px 1px 2px #888;
+    /* box-shadow: 0px 1px 2px #888; */
   }
 
   .title {
     display: block;
     text-align: center;
+    border-radius: 20px;
     color: #ffffff;
     background: #000000;
     margin-right: 35px;

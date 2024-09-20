@@ -14,9 +14,12 @@ const Posting = () => {
   if (isPending) return <div>로딩중입니다!</div>;
   if (isError) return <div>에러가 발생했습니다!</div>;
 
+  // 최신순으로 정렬(하영님께 말씀드리기!)
+  const sortedData = data?.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+
   return (
     <div>
-      {data?.map((feed) => {
+      {sortedData?.map((feed) => {
         return (
           <FeedContainder key={feed.id}>
             <ContentsContainer>
