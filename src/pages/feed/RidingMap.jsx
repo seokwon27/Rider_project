@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 
 const { kakao } = window;
 
@@ -26,7 +27,7 @@ const RidingMap = ({ id, roadLine }) => {
     const polyline = new kakao.maps.Polyline({
       path: linePath,
       strokeWeight: 5,
-      strokeColor: "#ff3700",
+      strokeColor: "#FF54F1",
       strokeOpacity: 0.7,
       strokeStyle: "solid"
     });
@@ -34,7 +35,13 @@ const RidingMap = ({ id, roadLine }) => {
     polyline.setMap(map);
   }, []);
 
-  return <div id={id} style={{ width: "300px", height: "230px" }}></div>;
+  return <Map id={id}></Map>;
 };
 
 export default RidingMap;
+
+const Map = styled.div`
+  width: 300px;
+  height: 230px;
+  cursor: pointer;
+`;
