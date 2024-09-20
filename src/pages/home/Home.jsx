@@ -9,6 +9,7 @@ import useGeoLocation from "../../hooks/useGeoLocation";
 import useInsertFeed from "../../hooks/useInsertFeed";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../store/useUserStore";
 
 const Home = () => {
   const [filterData, setFilterData] = useState([]);
@@ -17,6 +18,8 @@ const Home = () => {
   const [polyline, setPolyline] = useState({ roadLine: [] });
   const [totalDistance, setTotalDistance] = useState(0);
   const [mapCenter, setMapCenter] = useState({});
+
+  const user = useUserStore((state) => state.user);
 
   const { mutate: insertFeed, isLoading, isError } = useInsertFeed();
 
@@ -87,42 +90,56 @@ const Home = () => {
   };
 
   const handleInsertFeed = () => {
-    insertFeed(polyline, {
-      onSuccess: () => {
-        Swal.fire({
-          imageUrl: "/public/finishImg.png",
-          imageWidth: 180,
-          imageHeight: 100,
-          title: `
+    if (user) {
+      insertFeed(polyline, {
+        onSuccess: () => {
+          Swal.fire({
+            imageUrl: "/public/finishImg.png",
+            imageWidth: 180,
+            imageHeight: 100,
+            title: `
           ${polyline.BICYCLE_PATH}
           <br />
           종주점 찍기 완료`,
-          showConfirmButton: true,
-          showCancelButton: true,
-          confirmButtonText: "피드 보러가기",
-          cancelButtonText: "취소"
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/feed");
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "피드 보러가기",
+            cancelButtonText: "취소"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/feed");
+            }
+          });
+        },
+        onError: (err) => {
+          if (err.message === "이미 종주점을 찍었습니다.") {
+            Swal.fire({
+              title: "이미 종주점을 찍었습니다.",
+              confirmButtonText: "확인"
+            });
+          } else {
+            Swal.fire({
+              title: "오류 발생",
+              text: "종주점을 저장하는 중 오류가 발생했습니다.",
+              icon: "error",
+              confirmButtonText: "확인"
+            });
           }
-        });
-      },
-      onError: (err) => {
-        if (err.message === "이미 종주점을 찍었습니다.") {
-          Swal.fire({
-            title: "이미 종주점을 찍었습니다.",
-            confirmButtonText: "확인"
-          });
-        } else {
-          Swal.fire({
-            title: "오류 발생",
-            text: "종주점을 저장하는 중 오류가 발생했습니다.",
-            icon: "error",
-            confirmButtonText: "확인"
-          });
         }
-      }
-    });
+      });
+    } else {
+      Swal.fire({
+        title: "로그인 한 유저만 가능합니다.",
+        text: "로그인 후 이용해주세요.",
+        confirmButtonText: "로그인 하러 가기",
+        showCancelButton: true,
+        cancelButtonText: "취소"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
   };
 
   return (
@@ -232,9 +249,11 @@ const Home = () => {
                   <span className="title">
                     {polyline.BICYCLE_PATH} &nbsp;
                     {totalDistance}km <br />
-                    <FeedButton onClick={() => handleInsertFeed()}>
-                      {isLoading ? "저장 중..." : "종주점 찍기"}
-                    </FeedButton>
+                    {user ? (
+                      <FeedButton onClick={() => handleInsertFeed()}>
+                        {isLoading ? "저장 중..." : "종주점 찍기"}
+                      </FeedButton>
+                    ) : null}
                   </span>
                 </CustomOverlay>
               </CustomOverlayMap>
