@@ -154,7 +154,7 @@ const Mypage = () => {
                 <RideItemTextWrap>
                   <RideItemTitle>{feed.BICYCLE_PATH}</RideItemTitle>
                   <RideItemDate>최종 종주 일자 : {feed.created_time.split(" ")[0]}</RideItemDate>
-                  {user == feed.userId ? (
+                  {user.id == feed.userId ? (
                     <RideItemButtonWrap>
                       <RideItemButton
                         onClick={() =>

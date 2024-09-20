@@ -196,12 +196,26 @@ const Home = () => {
                 }}
               />
               {positions.map((position, index) => {
+                const type = (el) => {
+                  switch (el.title) {
+                    case "화장실":
+                      return "/public/toiletMarker.png";
+                    case "급수대":
+                      return "/public/waterSupplyMarker.png";
+                    case "공기주입기":
+                      return "/public/airInjectorMarker.png";
+                    case "인증센터":
+                      return "/public/certificateMarker.png";
+                    default:
+                      return "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                  }
+                };
                 return (
                   <MapMarker
-                    key={`${position.title}-${position.latlng.lat}-${position.latlng.lng}`}
+                    key={`${position.id}-${position.title}-${position.latlng.lat}-${position.latlng.lng}`}
                     position={position.latlng}
                     image={{
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      src: `${type(position)}`, // 마커이미지의 주소입니다
                       size: {
                         width: 24,
                         height: 35

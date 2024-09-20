@@ -52,14 +52,14 @@ function useInsertFeed() {
     }
 
     const response = await axios.post(`${import.meta.env.VITE_FEED_URL}/feed`, {
-      userId: user.userId,
+      userId: user.id,
       nickname: user.nickname,
       profile_img: RandomPic,
       visibility: true,
       created_time: getKoreanTime(),
       BICYCLE_PATH: polyline.BICYCLE_PATH,
       ROAD_SN: polyline.ROAD_SN,
-      thumb: 0,
+      thumb: [],
       roadLine: polyline.roadLine
     });
 
