@@ -7,24 +7,15 @@ import { useInView } from "react-intersection-observer";
 import KakaoMap from "../../components/common/KakaoMap";
 import useUserStore from "../../store/useUserStore";
 import authInstance from "../../axiosInstance/Auth";
-import { getUserProfile } from "../../api/auth";
+import { updateProfile } from "../../api/auth";
 
 const Mypage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useUserStore();
 
-  const profileUpdate = async (userData) => {
-    const response = await authInstance.post("/login", userData);
-    const { setUser, setAccessToken } = useUserStore.getState();
-    setAccessToken(response.data.accessToken);
-
-    const userProfile = await getUserProfile(response.data.accessToken);
-    setUser(userProfile);
-  };
-
   const getFeedsByPageNum = async ({ pageParam = 1 }) => {
-    const userId = localStorage.getItem("userId");
+    const userId = user.id;
     const response = await axios.get(
       `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageParam}&_limit=5&userId=${userId}`
     );
@@ -71,20 +62,27 @@ const Mypage = () => {
         input: "input-field-class"
       },
       preConfirm: async (nickname) => {
+        if (!nickname) {
+          Swal.showValidationMessage("닉네임을 입력해주세요!");
+          return;
+        }
+
         try {
-          const response = await axios.patch(
-            "https://moneyfulpublicpolicy.co.kr" + "/profile",
-            { nickname },
-            {
-              headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-            }
-          );
-          if (!response.data.success) {
-            return Swal.showValidationMessage(`
-                ${JSON.stringify(await response.json())}
-              `);
+          const { setUser, user } = useUserStore.getState();
+          const response = await updateProfile({ nickname });
+
+          if (!response.success) {
+            return Swal.showValidationMessage(`Error: ${response.message}`);
           }
+
+          setUser({
+            ...user,
+            nickname: response.nickname
+          });
+
+          return response;
         } catch (error) {
+          console.error("Error occurred:", error);
           if (error.status == 401) {
             // 로그인 만료 처리
             Swal.fire({
@@ -107,63 +105,17 @@ const Mypage = () => {
           }
         }
       },
-      // preConfirm: async (nickname) => {
-      //   console.log("preConfirm=>", nickname);
-
-      //   if (!nickname) {
-      //     Swal.showValidationMessage("Nickname is required.");
-      //     return;
-      //   }
-
-      //   try {
-      //     const { accessToken } = useUserStore.getState();
-
-      //     const response = await authInstance.patch(
-      //       "/profile",
-      //       { nickname },
-      //       {
-      //         headers: {
-      //           Authorization: `Bearer ${accessToken}`
-      //         }
-      //       }
-      //     );
-      //     if (!response.data.success) {
-      //       return Swal.showValidationMessage(`Error: ${response.data.message}`);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error occurred:", error);
-      //     if (error.status == 401) {
-      //       // 로그인 만료 처리
-      //       Swal.fire({
-      //         icon: "error",
-
-      //         title: `로그인 만료\n다시 로그인해주세요!`,
-      //         showConfirmButton: false,
-      //         timer: 1500
-      //       }).then(() => {
-      //         navigate("/login");
-      //       });
-      //       return Promise.reject(error);
-      //     } else {
-      //       Swal.fire({
-      //         icon: "error",
-      //         title: "서버 연결 실패",
-      //         showConfirmButton: false,
-      //         timer: 1500
-      //       });
-      //       return Promise.reject(error);
-      //     }
-      //   }
-      // },
 
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       console.log("confirm result :>> ", result);
       if (result.isConfirmed) {
+        console.log("result.value= ", result.value);
         Swal.fire({
-          title: `${result.value}으로\n변경되었습니다!`
+          title: `${result.value.nickname}으로\n변경되었습니다!`
         });
       }
+      return result.value.nickname;
     });
 
   const toggleFn = async ({ feedId, feedVisibility }) => {
@@ -188,7 +140,6 @@ const Mypage = () => {
 
   return (
     <MyPageWrapper>
-      {/* <button onClick={profileUpdate}>로그인</button> */}
       <MyPageHeader>
         <MyPageHeaderP $rightBorder={true}>내 종주점 모아보기</MyPageHeaderP>
         <MyPageHeaderP onClick={confirmUpdate}>내 정보 수정</MyPageHeaderP>

@@ -25,7 +25,7 @@ const Login = () => {
       <AuthForm mode="login" onSubmit={handleLogin} />
       <p className="text-sm">
         계정이 없으신가요?{" "}
-        <Link to="/signup" className="text-gray-400 hover:text-blue-400 underline">
+        <Link to="/signup" className="text-gray-400 hover:text-blue-400 underline underline-offset-4">
           회원가입 바로가기
         </Link>
       </p>
