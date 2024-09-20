@@ -1,26 +1,27 @@
-import { useState } from "react";
-import { updateThumb } from "../../api/feedApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp as regularThumb } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsUp as solidThumb } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import useUserStore from "../../store/useUserStore";
+import feedInstance from "../../axiosInstance/feed";
 
 const Thumb = ({ currentFeedId, currentThumb }) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [thumbCount, setThumbCount] = useState(currentThumb);
-  const updatedThumbCount = isClicked ? thumbCount - 1 : thumbCount + 1;
   const queryClient = useQueryClient();
 
-  const handleThumb = () => {
-    setIsClicked((prev) => !prev);
-    setThumbCount(updatedThumbCount);
+  const { user } = useUserStore();
+
+  const isUserLiked = currentThumb.some((el) => el == user.id);
+  console.log("isUserLiked :>> ", isUserLiked);
+  const thumbCount = currentThumb.length;
+
+  const updateThumb = async (feedId) => {
+    const newThumb = isUserLiked ? [...currentThumb].filter((el) => el !== user.id) : [...currentThumb, user.id];
+    await feedInstance.patch(`/feed/${feedId}`, { thumb: newThumb });
   };
 
   const { mutate: addThumb } = useMutation({
-    mutationFn: (id) => {
-      updateThumb(id, thumbCount);
-    },
+    mutationFn: updateThumb,
     onSuccess: () => {
       queryClient.invalidateQueries(["feed"]);
     }
@@ -28,13 +29,8 @@ const Thumb = ({ currentFeedId, currentThumb }) => {
 
   return (
     <div>
-      <Button
-        onClick={() => {
-          handleThumb();
-          addThumb(currentFeedId);
-        }}
-      >
-        {isClicked ? <FontAwesomeIcon icon={solidThumb} /> : <FontAwesomeIcon icon={regularThumb} />}
+      <Button onClick={() => addThumb(currentFeedId)}>
+        {isUserLiked ? <FontAwesomeIcon icon={solidThumb} /> : <FontAwesomeIcon icon={regularThumb} />}
       </Button>
       {thumbCount}
     </div>

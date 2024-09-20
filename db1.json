@@ -7,7 +7,7 @@
       "created_time": "2024-09-20 12:55:20",
       "BICYCLE_PATH": "아라자전거길",
       "ROAD_SN": 1,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 1,
@@ -727,7 +727,7 @@
       "created_time": "2024-09-20 13:00:48",
       "BICYCLE_PATH": "남한강자전거길",
       "ROAD_SN": 3,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 996,
@@ -9439,7 +9439,7 @@
       "created_time": "2024-09-20 13:02:17",
       "BICYCLE_PATH": "새재자전거길",
       "ROAD_SN": 4,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 66895,
@@ -42511,7 +42511,7 @@
       "created_time": "2024-09-20 13:02:28",
       "BICYCLE_PATH": "낙동강자전거길",
       "ROAD_SN": 5,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 7913,
@@ -75793,7 +75793,7 @@
       "created_time": "2024-09-20 13:02:41",
       "BICYCLE_PATH": "신안 증도 자전거섬",
       "ROAD_SN": 20,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 50880,
@@ -78283,7 +78283,7 @@
       "created_time": "2024-09-20 13:22:34",
       "BICYCLE_PATH": "느림의 미학 완도군 청산도 자전거길",
       "ROAD_SN": 30,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 52688,
@@ -78685,7 +78685,7 @@
       "created_time": "2024-09-20 13:58:37",
       "BICYCLE_PATH": "제주도(상모리~사계리) 자전거길",
       "ROAD_SN": 46,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 53757,
@@ -78763,7 +78763,7 @@
       "created_time": "2024-09-20 14:03:13",
       "BICYCLE_PATH": "옹진의 아름다운 시시모도 자전거 여행길",
       "ROAD_SN": 25,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 52345,
@@ -79051,7 +79051,7 @@
       "created_time": "2024-09-20 14:20:05",
       "BICYCLE_PATH": "강릉 경포호 산소길",
       "ROAD_SN": 14,
-      "thumb": 0,
+      "thumb": [],
       "roadLine": [
         {
           "road_id": 49428,
