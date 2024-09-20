@@ -14,7 +14,7 @@ const Mypage = () => {
   const queryClient = useQueryClient();
   const { user } = useUserStore();
 
-  const testLogin = async (userData) => {
+  const profileUpdate = async (userData) => {
     const response = await authInstance.post("/login", userData);
     const { setUser, setAccessToken } = useUserStore.getState();
     setAccessToken(response.data.accessToken);
@@ -70,21 +70,68 @@ const Mypage = () => {
         cancelButton: "cancel-button-class",
         input: "input-field-class"
       },
+      // preConfirm: async (nickname) => {
+      //   try {
+      //     const response = await axios.patch(
+      //       "https://moneyfulpublicpolicy.co.kr" + "/profile",
+      //       { nickname },
+      //       {
+      //         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
+      //       }
+      //     );
+      //     if (!response.data.success) {
+      //       return Swal.showValidationMessage(`
+      //           ${JSON.stringify(await response.json())}
+      //         `);
+      //     }
+      //   } catch (error) {
+      //     if (error.status == 401) {
+      //       // 로그인 만료 처리
+      //       Swal.fire({
+      //         icon: "error",
+      //         title: `로그인 만료\n다시 로그인해주세요!`,
+      //         showConfirmButton: false,
+      //         timer: 1500
+      //       }).then(() => {
+      //         navigate("/login");
+      //       });
+      //       return Promise.reject(error);
+      //     } else {
+      //       Swal.fire({
+      //         icon: "error",
+      //         title: "서버 연결 실패",
+      //         showConfirmButton: false,
+      //         timer: 1500
+      //       });
+      //       return Promise.reject(error);
+      //     }
+      //   }
+      // },
       preConfirm: async (nickname) => {
+        console.log("preConfirm=>", nickname);
+
+        if (!nickname) {
+          Swal.showValidationMessage("Nickname is required.");
+          return;
+        }
+
         try {
-          const response = await axios.patch(
-            "https://moneyfulpublicpolicy.co.kr" + "/profile",
+          const { accessToken } = useUserStore.getState();
+
+          const response = await authInstance.patch(
+            "/profile",
             { nickname },
             {
-              headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
             }
           );
           if (!response.data.success) {
-            return Swal.showValidationMessage(`
-                ${JSON.stringify(await response.json())}
-              `);
+            return Swal.showValidationMessage(`Error: ${response.data.message}`);
           }
         } catch (error) {
+          console.error("Error occurred:", error);
           if (error.status == 401) {
             // 로그인 만료 처리
             Swal.fire({
@@ -107,6 +154,7 @@ const Mypage = () => {
           }
         }
       },
+
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       console.log("confirm result :>> ", result);
@@ -139,7 +187,7 @@ const Mypage = () => {
 
   return (
     <MyPageWrapper>
-      <button onClick={testLogin}>로그인</button>
+      {/* <button onClick={profileUpdate}>로그인</button> */}
       <MyPageHeader>
         <MyPageHeaderP $rightBorder={true}>내 종주점 모아보기</MyPageHeaderP>
         <MyPageHeaderP onClick={confirmUpdate}>내 정보 수정</MyPageHeaderP>
