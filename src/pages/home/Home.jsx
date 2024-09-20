@@ -18,7 +18,7 @@ const Home = () => {
   const [polyline, setPolyline] = useState({ roadLine: [] });
   const [totalDistance, setTotalDistance] = useState(0);
   const [mapCenter, setMapCenter] = useState({});
-
+  const [centerCoord, setCenterCoord] = useState(null);
   const user = useUserStore((state) => state.user);
 
   const { mutate: insertFeed, isLoading, isError } = useInsertFeed();
@@ -28,6 +28,15 @@ const Home = () => {
   // console.log(filterData);
   //현위치
   const location = useGeoLocation();
+  const [positions, setPositions] = useState([]);
+  const [amenityDatas, setAmenityDatas] = useState([]);
+  // console.log("amenityDatas =>", amenityDatas);
+
+  // console.log(filterData);
+  //현위치
+  // useEffect(() => {
+  //   setCenterCoord(location.center);
+  // }, []);
   // console.log(location);
 
   useEffect(() => {
@@ -160,16 +169,23 @@ const Home = () => {
             setSelectedButton={setSelectedButton}
             searchValue={searchValue}
           />
-          <List filterData={filterData} setPolyline={setPolyline} />
+          <List
+            filterData={filterData}
+            setPolyline={setPolyline}
+            setPositions={setPositions} //마커 좌표
+            setAmenityDatas={setAmenityDatas} // 경로 편의시설 데이터
+            setCenterCoord={setCenterCoord}
+          />
         </SearchFilterDiv>
 
         <MapContainer>
           {polyline.roadLine.length === 0 ? (
             <Map
               id="map"
-              center={mapCenter.lat ? mapCenter : location.center}
+              // center={mapCenter.lat ? mapCenter : location.center}
+              center={centerCoord ? centerCoord : location.center}
               style={{ width: "100%", height: "100%" }}
-              level={polyline.roadLine.length > 0 ? 8 : 3}
+              level={polyline.roadLine.length > 0 ? 1 : 3}
             >
               <MapMarker
                 position={location.center}
@@ -179,6 +195,22 @@ const Home = () => {
                   options: { offset: { x: 27, y: 69 } }
                 }}
               />
+              {positions.map((position, index) => {
+                return (
+                  <MapMarker
+                    key={`${position.title}-${position.latlng.lat}-${position.latlng.lng}`}
+                    position={position.latlng}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      size: {
+                        width: 24,
+                        height: 35
+                      } // 마커이미지의 크기입니다
+                    }}
+                    title={position.title}
+                  />
+                );
+              })}
               <CustomOverlayMap position={location.center} yAnchor={1}>
                 <CustomOverlay>
                   <span className="title">현재 위치</span>
@@ -267,6 +299,37 @@ const Home = () => {
                 strokeOpacity={0.7}
                 strokeStyle={"solid"}
               />
+              {amenityDatas.map((el, index) => {
+                const type = (el) => {
+                  switch (el.Classification) {
+                    case "화장실":
+                      return "/public/toiletMarker.png";
+                    case "급수대":
+                      return "/public/waterSupplyMarker.png";
+                    case "공기주입기":
+                      return "/public/airInjectorMarker.png";
+                    case "인증센터":
+                      return "/public/certificateMarker.png";
+                    default:
+                      return "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                  }
+                };
+
+                return (
+                  <MapMarker
+                    key={`${el.name}${el.id}-${el.latitude}-${el.longitude}`}
+                    position={{ lat: el.latitude, lng: el.longitude }}
+                    image={{
+                      src: `${type(el)}`, // 마커이미지의 주소입니다
+                      size: {
+                        width: 30,
+                        height: 30
+                      } // 마커이미지의 크기입니다
+                    }}
+                    title={el.name}
+                  />
+                );
+              })}
             </Map>
           )}
         </MapContainer>
