@@ -16,7 +16,7 @@ const KakaoMap = ({ roadLine }) => {
     const polyline = new kakao.maps.Polyline({
       path,
       strokeWeight: 5,
-      strokeColor: "#d400ff",
+      strokeColor: "#ff54f1",
       strokeOpacity: 0.8,
       strokeStyle: "solid"
     });
