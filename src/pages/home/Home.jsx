@@ -211,19 +211,34 @@ const Home = () => {
                 strokeOpacity={0.7}
                 strokeStyle={"solid"}
               />
-              {amenityDatas.map((position, index) => {
+              {amenityDatas.map((el, index) => {
+                const type = (el) => {
+                  switch (el.Classification) {
+                    case "화장실":
+                      return "/public/toiletMarker.png";
+                    case "급수대":
+                      return "/public/waterSupplyMarker.png";
+                    case "공기주입기":
+                      return "/public/airInjectorMarker.png";
+                    case "인증센터":
+                      return "/public/certificateMarker.png";
+                    default:
+                      return "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                  }
+                };
+
                 return (
                   <MapMarker
-                    key={`${position.name}${position.id}-${position.latitude}-${position.longitude}`}
-                    position={{ lat: position.latitude, lng: position.longitude }}
+                    key={`${el.name}${el.id}-${el.latitude}-${el.longitude}`}
+                    position={{ lat: el.latitude, lng: el.longitude }}
                     image={{
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      src: `${type(el)}`, // 마커이미지의 주소입니다
                       size: {
-                        width: 24,
-                        height: 35
+                        width: 30,
+                        height: 30
                       } // 마커이미지의 크기입니다
                     }}
-                    title={position.name}
+                    title={el.name}
                   />
                 );
               })}
