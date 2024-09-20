@@ -1,10 +1,10 @@
 {
   "feed": [
     {
-      "nickname": "나는 T100 이다",
-      "profile_img": "https://cdn.bicyclelife.net/news/photo/201808/1520_9796_3830.jpg",
+      "userId": "내아이디는설하영",
+      "nickname": "내이름은 설하영",
       "visibility": true,
-      "created_time": "2024-09-20 20:33:18",
+      "created_time": "2024-09-20 12:55:20",
       "BICYCLE_PATH": "아라자전거길",
       "ROAD_SN": 1,
       "thumb": [],
@@ -719,8 +719,6 @@
         }
       ],
       "id": 1
-<<<<<<< HEAD
-=======
     },
     {
       "userId": "내아이디는설하영",
@@ -79845,7 +79843,727 @@
         }
       ],
       "id": 9
->>>>>>> e8794d9545141dd2241e91a089291843d7cfc250
+    },
+    {
+      "userId": "test13312123",
+      "nickname": "으아아아아앙",
+      "profile_img": "https://cdn.bicyclelife.net/news/photo/201808/1520_9796_3830.jpg",
+      "visibility": true,
+      "created_time": "2024-09-20 23:40:13",
+      "BICYCLE_PATH": "아라자전거길",
+      "ROAD_SN": 1,
+      "thumb": [],
+      "roadLine": [
+        {
+          "road_id": 1,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55737548,
+          "LINE_YP": 126.603468
+        },
+        {
+          "road_id": 2,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55563357,
+          "LINE_YP": 126.6057874
+        },
+        {
+          "road_id": 3,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55452492,
+          "LINE_YP": 126.6073606
+        },
+        {
+          "road_id": 4,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55490635,
+          "LINE_YP": 126.6075829
+        },
+        {
+          "road_id": 5,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55520119,
+          "LINE_YP": 126.6078804
+        },
+        {
+          "road_id": 6,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55535694,
+          "LINE_YP": 126.6083086
+        },
+        {
+          "road_id": 7,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5553483,
+          "LINE_YP": 126.6088131
+        },
+        {
+          "road_id": 8,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55525338,
+          "LINE_YP": 126.6093161
+        },
+        {
+          "road_id": 9,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55502871,
+          "LINE_YP": 126.6100098
+        },
+        {
+          "road_id": 10,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55529303,
+          "LINE_YP": 126.6120167
+        },
+        {
+          "road_id": 11,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55582862,
+          "LINE_YP": 126.6169696
+        },
+        {
+          "road_id": 12,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.55673135,
+          "LINE_YP": 126.6219347
+        },
+        {
+          "road_id": 13,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56003322,
+          "LINE_YP": 126.6205404
+        },
+        {
+          "road_id": 14,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56046596,
+          "LINE_YP": 126.6221566
+        },
+        {
+          "road_id": 15,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56064324,
+          "LINE_YP": 126.6224731
+        },
+        {
+          "road_id": 16,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5608358,
+          "LINE_YP": 126.6224928
+        },
+        {
+          "road_id": 17,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56358812,
+          "LINE_YP": 126.6213212
+        },
+        {
+          "road_id": 18,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56443593,
+          "LINE_YP": 126.6208207
+        },
+        {
+          "road_id": 19,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56502182,
+          "LINE_YP": 126.6203118
+        },
+        {
+          "road_id": 20,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56526792,
+          "LINE_YP": 126.6213076
+        },
+        {
+          "road_id": 21,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56713167,
+          "LINE_YP": 126.6280156
+        },
+        {
+          "road_id": 22,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56731616,
+          "LINE_YP": 126.6290147
+        },
+        {
+          "road_id": 23,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56862093,
+          "LINE_YP": 126.6340634
+        },
+        {
+          "road_id": 24,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56893806,
+          "LINE_YP": 126.6351448
+        },
+        {
+          "road_id": 25,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56900507,
+          "LINE_YP": 126.6352249
+        },
+        {
+          "road_id": 26,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56918001,
+          "LINE_YP": 126.6353063
+        },
+        {
+          "road_id": 27,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56920971,
+          "LINE_YP": 126.635355
+        },
+        {
+          "road_id": 28,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.56983101,
+          "LINE_YP": 126.6375217
+        },
+        {
+          "road_id": 29,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57016365,
+          "LINE_YP": 126.6393785
+        },
+        {
+          "road_id": 30,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57025916,
+          "LINE_YP": 126.6403801
+        },
+        {
+          "road_id": 31,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57039695,
+          "LINE_YP": 126.6429887
+        },
+        {
+          "road_id": 32,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57061191,
+          "LINE_YP": 126.6484948
+        },
+        {
+          "road_id": 33,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57150633,
+          "LINE_YP": 126.6602689
+        },
+        {
+          "road_id": 34,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57156009,
+          "LINE_YP": 126.6613775
+        },
+        {
+          "road_id": 35,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5715223,
+          "LINE_YP": 126.6614464
+        },
+        {
+          "road_id": 36,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57152019,
+          "LINE_YP": 126.6615403
+        },
+        {
+          "road_id": 37,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57158268,
+          "LINE_YP": 126.6626426
+        },
+        {
+          "road_id": 38,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57165282,
+          "LINE_YP": 126.6628205
+        },
+        {
+          "road_id": 39,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5717181,
+          "LINE_YP": 126.6632192
+        },
+        {
+          "road_id": 40,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57177661,
+          "LINE_YP": 126.6638276
+        },
+        {
+          "road_id": 41,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57175494,
+          "LINE_YP": 126.6656034
+        },
+        {
+          "road_id": 42,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57169328,
+          "LINE_YP": 126.6666681
+        },
+        {
+          "road_id": 43,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57138091,
+          "LINE_YP": 126.6702527
+        },
+        {
+          "road_id": 44,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57121058,
+          "LINE_YP": 126.6708248
+        },
+        {
+          "road_id": 45,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57113888,
+          "LINE_YP": 126.672023
+        },
+        {
+          "road_id": 46,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57116348,
+          "LINE_YP": 126.6726607
+        },
+        {
+          "road_id": 47,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57103047,
+          "LINE_YP": 126.6741191
+        },
+        {
+          "road_id": 48,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57102366,
+          "LINE_YP": 126.6746399
+        },
+        {
+          "road_id": 49,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57083176,
+          "LINE_YP": 126.674999
+        },
+        {
+          "road_id": 50,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57065666,
+          "LINE_YP": 126.676551
+        },
+        {
+          "road_id": 51,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57044278,
+          "LINE_YP": 126.680092
+        },
+        {
+          "road_id": 52,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57069693,
+          "LINE_YP": 126.6805574
+        },
+        {
+          "road_id": 53,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57070892,
+          "LINE_YP": 126.6833527
+        },
+        {
+          "road_id": 54,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57082961,
+          "LINE_YP": 126.6858686
+        },
+        {
+          "road_id": 55,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57087943,
+          "LINE_YP": 126.6861369
+        },
+        {
+          "road_id": 56,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57090029,
+          "LINE_YP": 126.6886307
+        },
+        {
+          "road_id": 57,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57100763,
+          "LINE_YP": 126.6924011
+        },
+        {
+          "road_id": 58,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57234836,
+          "LINE_YP": 126.721549
+        },
+        {
+          "road_id": 59,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57232642,
+          "LINE_YP": 126.7226989
+        },
+        {
+          "road_id": 60,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57274063,
+          "LINE_YP": 126.7324703
+        },
+        {
+          "road_id": 61,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5730362,
+          "LINE_YP": 126.7367977
+        },
+        {
+          "road_id": 62,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57298386,
+          "LINE_YP": 126.7372642
+        },
+        {
+          "road_id": 63,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57304635,
+          "LINE_YP": 126.7400868
+        },
+        {
+          "road_id": 64,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.573123,
+          "LINE_YP": 126.7416785
+        },
+        {
+          "road_id": 65,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57313977,
+          "LINE_YP": 126.7438619
+        },
+        {
+          "road_id": 66,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57324758,
+          "LINE_YP": 126.7460061
+        },
+        {
+          "road_id": 67,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57328515,
+          "LINE_YP": 126.746256
+        },
+        {
+          "road_id": 68,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57328948,
+          "LINE_YP": 126.746934
+        },
+        {
+          "road_id": 69,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57340028,
+          "LINE_YP": 126.749558
+        },
+        {
+          "road_id": 70,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57349352,
+          "LINE_YP": 126.7511669
+        },
+        {
+          "road_id": 71,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5735676,
+          "LINE_YP": 126.751938
+        },
+        {
+          "road_id": 72,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57380152,
+          "LINE_YP": 126.7534795
+        },
+        {
+          "road_id": 73,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57368606,
+          "LINE_YP": 126.7540404
+        },
+        {
+          "road_id": 74,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57369799,
+          "LINE_YP": 126.7541759
+        },
+        {
+          "road_id": 75,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57385282,
+          "LINE_YP": 126.7545916
+        },
+        {
+          "road_id": 76,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57384197,
+          "LINE_YP": 126.7555027
+        },
+        {
+          "road_id": 77,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57381306,
+          "LINE_YP": 126.7557464
+        },
+        {
+          "road_id": 78,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57378058,
+          "LINE_YP": 126.7558614
+        },
+        {
+          "road_id": 79,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57347407,
+          "LINE_YP": 126.7564069
+        },
+        {
+          "road_id": 80,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57345004,
+          "LINE_YP": 126.7565462
+        },
+        {
+          "road_id": 81,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57351358,
+          "LINE_YP": 126.7574079
+        },
+        {
+          "road_id": 82,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57369392,
+          "LINE_YP": 126.7585258
+        },
+        {
+          "road_id": 83,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57412188,
+          "LINE_YP": 126.7599678
+        },
+        {
+          "road_id": 84,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57434778,
+          "LINE_YP": 126.7604663
+        },
+        {
+          "road_id": 85,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57499101,
+          "LINE_YP": 126.76143
+        },
+        {
+          "road_id": 86,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5751182,
+          "LINE_YP": 126.7615227
+        },
+        {
+          "road_id": 87,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57545326,
+          "LINE_YP": 126.7616654
+        },
+        {
+          "road_id": 88,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5755429,
+          "LINE_YP": 126.7617271
+        },
+        {
+          "road_id": 89,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57561828,
+          "LINE_YP": 126.7618333
+        },
+        {
+          "road_id": 90,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57628794,
+          "LINE_YP": 126.7630419
+        },
+        {
+          "road_id": 91,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57743962,
+          "LINE_YP": 126.7648873
+        },
+        {
+          "road_id": 92,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.57864488,
+          "LINE_YP": 126.7664518
+        },
+        {
+          "road_id": 93,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58005394,
+          "LINE_YP": 126.7681581
+        },
+        {
+          "road_id": 94,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58189658,
+          "LINE_YP": 126.7706004
+        },
+        {
+          "road_id": 95,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58221519,
+          "LINE_YP": 126.7711086
+        },
+        {
+          "road_id": 96,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58288161,
+          "LINE_YP": 126.7718667
+        },
+        {
+          "road_id": 97,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58414188,
+          "LINE_YP": 126.7734595
+        },
+        {
+          "road_id": 98,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.58749758,
+          "LINE_YP": 126.7779277
+        },
+        {
+          "road_id": 99,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59107988,
+          "LINE_YP": 126.7826219
+        },
+        {
+          "road_id": 100,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59242987,
+          "LINE_YP": 126.7843215
+        },
+        {
+          "road_id": 101,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59245148,
+          "LINE_YP": 126.7846899
+        },
+        {
+          "road_id": 102,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59293791,
+          "LINE_YP": 126.7857268
+        },
+        {
+          "road_id": 103,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59164853,
+          "LINE_YP": 126.7878277
+        },
+        {
+          "road_id": 104,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59082411,
+          "LINE_YP": 126.7892498
+        },
+        {
+          "road_id": 105,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59065656,
+          "LINE_YP": 126.7896131
+        },
+        {
+          "road_id": 106,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59059665,
+          "LINE_YP": 126.790082
+        },
+        {
+          "road_id": 107,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59062407,
+          "LINE_YP": 126.7903461
+        },
+        {
+          "road_id": 108,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59082724,
+          "LINE_YP": 126.790998
+        },
+        {
+          "road_id": 109,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59291663,
+          "LINE_YP": 126.7960821
+        },
+        {
+          "road_id": 110,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59358329,
+          "LINE_YP": 126.7979431
+        },
+        {
+          "road_id": 111,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59368286,
+          "LINE_YP": 126.79814
+        },
+        {
+          "road_id": 112,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59473345,
+          "LINE_YP": 126.7974851
+        },
+        {
+          "road_id": 113,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.5968703,
+          "LINE_YP": 126.7965443
+        },
+        {
+          "road_id": 114,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59703254,
+          "LINE_YP": 126.7965243
+        },
+        {
+          "road_id": 115,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59723949,
+          "LINE_YP": 126.796578
+        },
+        {
+          "road_id": 116,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59763798,
+          "LINE_YP": 126.7969761
+        },
+        {
+          "road_id": 117,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59876086,
+          "LINE_YP": 126.8000577
+        },
+        {
+          "road_id": 118,
+          "ROAD_SN": 1,
+          "LINE_XP": 37.59867711,
+          "LINE_YP": 126.8001093
+        }
+      ],
+      "id": 10
     }
   ]
 }
