@@ -70,73 +70,25 @@ const Mypage = () => {
         cancelButton: "cancel-button-class",
         input: "input-field-class"
       },
-      // preConfirm: async (nickname) => {
-      //   try {
-      //     const response = await axios.patch(
-      //       "https://moneyfulpublicpolicy.co.kr" + "/profile",
-      //       { nickname },
-      //       {
-      //         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-      //       }
-      //     );
-      //     if (!response.data.success) {
-      //       return Swal.showValidationMessage(`
-      //           ${JSON.stringify(await response.json())}
-      //         `);
-      //     }
-      //   } catch (error) {
-      //     if (error.status == 401) {
-      //       // 로그인 만료 처리
-      //       Swal.fire({
-      //         icon: "error",
-      //         title: `로그인 만료\n다시 로그인해주세요!`,
-      //         showConfirmButton: false,
-      //         timer: 1500
-      //       }).then(() => {
-      //         navigate("/login");
-      //       });
-      //       return Promise.reject(error);
-      //     } else {
-      //       Swal.fire({
-      //         icon: "error",
-      //         title: "서버 연결 실패",
-      //         showConfirmButton: false,
-      //         timer: 1500
-      //       });
-      //       return Promise.reject(error);
-      //     }
-      //   }
-      // },
       preConfirm: async (nickname) => {
-        console.log("preConfirm=>", nickname);
-
-        if (!nickname) {
-          Swal.showValidationMessage("Nickname is required.");
-          return;
-        }
-
         try {
-          const { accessToken } = useUserStore.getState();
-
-          const response = await authInstance.patch(
-            "/profile",
+          const response = await axios.patch(
+            "https://moneyfulpublicpolicy.co.kr" + "/profile",
             { nickname },
             {
-              headers: {
-                Authorization: `Bearer ${accessToken}`
-              }
+              headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
             }
           );
           if (!response.data.success) {
-            return Swal.showValidationMessage(`Error: ${response.data.message}`);
+            return Swal.showValidationMessage(`
+                ${JSON.stringify(await response.json())}
+              `);
           }
         } catch (error) {
-          console.error("Error occurred:", error);
           if (error.status == 401) {
             // 로그인 만료 처리
             Swal.fire({
               icon: "error",
-
               title: `로그인 만료\n다시 로그인해주세요!`,
               showConfirmButton: false,
               timer: 1500
@@ -155,6 +107,54 @@ const Mypage = () => {
           }
         }
       },
+      // preConfirm: async (nickname) => {
+      //   console.log("preConfirm=>", nickname);
+
+      //   if (!nickname) {
+      //     Swal.showValidationMessage("Nickname is required.");
+      //     return;
+      //   }
+
+      //   try {
+      //     const { accessToken } = useUserStore.getState();
+
+      //     const response = await authInstance.patch(
+      //       "/profile",
+      //       { nickname },
+      //       {
+      //         headers: {
+      //           Authorization: `Bearer ${accessToken}`
+      //         }
+      //       }
+      //     );
+      //     if (!response.data.success) {
+      //       return Swal.showValidationMessage(`Error: ${response.data.message}`);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error occurred:", error);
+      //     if (error.status == 401) {
+      //       // 로그인 만료 처리
+      //       Swal.fire({
+      //         icon: "error",
+
+      //         title: `로그인 만료\n다시 로그인해주세요!`,
+      //         showConfirmButton: false,
+      //         timer: 1500
+      //       }).then(() => {
+      //         navigate("/login");
+      //       });
+      //       return Promise.reject(error);
+      //     } else {
+      //       Swal.fire({
+      //         icon: "error",
+      //         title: "서버 연결 실패",
+      //         showConfirmButton: false,
+      //         timer: 1500
+      //       });
+      //       return Promise.reject(error);
+      //     }
+      //   }
+      // },
 
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
