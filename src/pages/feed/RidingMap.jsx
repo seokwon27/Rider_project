@@ -10,7 +10,11 @@ const RidingMap = ({ id, roadLine }) => {
         roadLine[Math.floor(roadLine.length / 2)].LINE_XP,
         roadLine[Math.floor(roadLine.length / 2)].LINE_YP
       ),
-      level: 11,
+      level:
+        (roadLine.length <= 100 && 8) ||
+        (roadLine.length <= 500 && 9) ||
+        (roadLine.length >= 1000 && 11) ||
+        (roadLine.length >= 3000 && 12),
       draggable: false
     };
 
@@ -30,7 +34,7 @@ const RidingMap = ({ id, roadLine }) => {
     polyline.setMap(map);
   }, []);
 
-  return <div id={id} style={{ width: "300px", height: "200px" }}></div>;
+  return <div id={id} style={{ width: "300px", height: "230px" }}></div>;
 };
 
 export default RidingMap;

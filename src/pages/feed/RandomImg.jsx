@@ -32,9 +32,9 @@ const RandomImg = () => {
 export default RandomImg;
 
 const Image = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
   position: absolute;
-  left: -100px;
+  left: -120px;
 `;
