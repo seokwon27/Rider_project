@@ -5,30 +5,21 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import KakaoMap from "../../components/common/KakaoMap";
+import useUserStore from "../../store/useUserStore";
+import authInstance from "../../axiosInstance/Auth";
+import { updateProfile } from "../../api/auth";
 
 const Mypage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const mockUserId = "내아이디는설하영";
-
-  //TODO - 프로필 수정을 위한 테스트로그인 함수입니다.
-  const testLogin = async () => {
-    //NOTE - 추후 zustand완성 시 필요없는 코드이므로 baseurl env설정하지 않았습니다.
-    const response = await axios.post("https://moneyfulpublicpolicy.co.kr/login", {
-      id: "test13312123",
-      password: "test13312123"
-    });
-    localStorage.setItem("accessToken", response?.data?.accessToken);
-    //TODO - 추후 유저정보관련 zustand 완성 시 유저id가져오는 방식을 변경할 예정입니다.
-    localStorage.setItem("userId", "내아이디는설하영");
-  };
+  const { user } = useUserStore();
 
   const getFeedsByPageNum = async ({ pageParam = 1 }) => {
-    const userId = localStorage.getItem("userId");
+    const userId = user.id;
     const response = await axios.get(
       `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageParam}&_limit=5&userId=${userId}`
     );
+    console.log("response :>> ", response);
     return response.data;
   };
 
@@ -60,8 +51,7 @@ const Mypage = () => {
       title: "닉네임 변경",
       input: "text",
       inputAttributes: {
-        // TODO - 이전닉 변경필요
-        placeholder: `이전 닉네임: dlwjsslrspdla`
+        placeholder: `이전 닉네임: ${user.nickname}`
       },
       showCancelButton: true,
       confirmButtonText: "확인",
@@ -73,20 +63,27 @@ const Mypage = () => {
         input: "input-field-class"
       },
       preConfirm: async (nickname) => {
+        if (!nickname) {
+          Swal.showValidationMessage("닉네임을 입력해주세요!");
+          return;
+        }
+
         try {
-          const response = await axios.patch(
-            "https://moneyfulpublicpolicy.co.kr" + "/profile",
-            { nickname },
-            {
-              headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-            }
-          );
-          if (!response.data.success) {
-            return Swal.showValidationMessage(`
-                ${JSON.stringify(await response.json())}
-              `);
+          const { setUser, user } = useUserStore.getState();
+          const response = await updateProfile({ nickname });
+
+          if (!response.success) {
+            return Swal.showValidationMessage(`Error: ${response.message}`);
           }
+
+          setUser({
+            ...user,
+            nickname: response.nickname
+          });
+
+          return response;
         } catch (error) {
+          console.error("Error occurred:", error);
           if (error.status == 401) {
             // 로그인 만료 처리
             Swal.fire({
@@ -109,14 +106,17 @@ const Mypage = () => {
           }
         }
       },
+
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       console.log("confirm result :>> ", result);
       if (result.isConfirmed) {
+        console.log("result.value= ", result.value);
         Swal.fire({
-          title: `${result.value}으로\n변경되었습니다!`
+          title: `${result.value.nickname}으로\n변경되었습니다!`
         });
       }
+      return result.value.nickname;
     });
 
   const toggleFn = async ({ feedId, feedVisibility }) => {
@@ -141,7 +141,6 @@ const Mypage = () => {
 
   return (
     <MyPageWrapper>
-      <button onClick={testLogin}>로그인</button>
       <MyPageHeader>
         <MyPageHeaderP $rightBorder={true}>내 종주점 모아보기</MyPageHeaderP>
         <MyPageHeaderP onClick={confirmUpdate}>내 정보 수정</MyPageHeaderP>
@@ -149,12 +148,13 @@ const Mypage = () => {
       <RideItemList>
         {feeds?.length ? (
           feeds.map((feed) => {
+            console.log("feed :>> ", feed);
             return (
               <RideItem key={feed.id}>
                 <RideItemTextWrap>
                   <RideItemTitle>{feed.BICYCLE_PATH}</RideItemTitle>
                   <RideItemDate>최종 종주 일자 : {feed.created_time.split(" ")[0]}</RideItemDate>
-                  {mockUserId == feed.userId ? (
+                  {user.id == feed.userId ? (
                     <RideItemButtonWrap>
                       <RideItemButton
                         onClick={() =>
