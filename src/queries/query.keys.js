@@ -1,5 +1,6 @@
 export const queryKeys = {
   boardController: {
-    myFeeds: () => ["myFeeds"]
+    myFeeds: () => ["myFeeds"],
+    feeds: () => ["feeds"]
   }
 };

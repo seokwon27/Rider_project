@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteFn, toggleFn } from "../api/feedApi";
+import { deleteFn, toggleFn, updateThumb } from "../api/feedApi";
 import { queryKeys } from "./query.keys";
 
 export const useDeleteMyFeed = () => {
@@ -22,6 +22,16 @@ export const useToggleMyFeed = () => {
     onError: (error) => {
       alert(`현재 변경할 수 없습니다.\n잠시 후 다시 시도해주세요!`);
       console.log("error :>> ", error);
+    }
+  });
+};
+
+export const useThumbMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateThumb,
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKeys.boardController.feeds());
     }
   });
 };
