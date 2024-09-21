@@ -1,7 +1,6 @@
 import Thumb from "./Thumb";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import RandomImg from "./RandomImg";
 import RidingMap from "./RidingMap";
 import { useInView } from "react-intersection-observer";
 import { getFeedPages } from "../../api/feedApi";
