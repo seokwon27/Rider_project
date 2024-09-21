@@ -1,143 +1,11 @@
-import axios from "axios";
 import styled from "styled-components";
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
-import KakaoMap from "../../components/common/KakaoMap";
-import useUserStore from "../../store/useUserStore";
-import authInstance from "../../axiosInstance/Auth";
-import { updateProfile } from "../../api/auth";
+import { useMyFeedsInfiniteQuery } from "../../queries/infiniteQueries";
+import useMyPage from "./useMyPage";
+import RideItem from "./RideItem";
 
 const Mypage = () => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { user } = useUserStore();
-
-  const getFeedsByPageNum = async ({ pageParam = 1 }) => {
-    const userId = user.id;
-    const response = await axios.get(
-      `${import.meta.env.VITE_FEED_URL}/feed?_page=${pageParam}&_limit=5&userId=${userId}`
-    );
-    console.log("response :>> ", response);
-    return response.data;
-  };
-
-  const {
-    data: feeds,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage
-  } = useInfiniteQuery({
-    queryKey: ["feeds"],
-    queryFn: getFeedsByPageNum,
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage.length === 5 ? pages.length + 1 : undefined;
-    },
-    select: (data) => data.pages.flat()
-  });
-
-  const { ref } = useInView({
-    threshold: 1,
-    onChange: (inView) => {
-      if (!inView || !hasNextPage || isFetchingNextPage) return;
-      fetchNextPage();
-    }
-  });
-
-  const confirmUpdate = () =>
-    Swal.fire({
-      icon: "warning",
-      title: "닉네임 변경",
-      input: "text",
-      inputAttributes: {
-        placeholder: `이전 닉네임: ${user.nickname}`
-      },
-      showCancelButton: true,
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-      showLoaderOnConfirm: true,
-      customClass: {
-        confirmButton: "confirm-button-class",
-        cancelButton: "cancel-button-class",
-        input: "input-field-class"
-      },
-      preConfirm: async (nickname) => {
-        if (!nickname) {
-          Swal.showValidationMessage("닉네임을 입력해주세요!");
-          return;
-        }
-
-        try {
-          const { setUser, user } = useUserStore.getState();
-          const response = await updateProfile({ nickname });
-
-          if (!response.success) {
-            return Swal.showValidationMessage(`Error: ${response.message}`);
-          }
-
-          setUser({
-            ...user,
-            nickname: response.nickname
-          });
-
-          return response;
-        } catch (error) {
-          console.error("Error occurred:", error);
-          if (error.status == 401) {
-            // 로그인 만료 처리
-            Swal.fire({
-              icon: "error",
-              title: `로그인 만료\n다시 로그인해주세요!`,
-              showConfirmButton: false,
-              timer: 1500
-            }).then(() => {
-              navigate("/login");
-            });
-            return Promise.reject(error);
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "서버 연결 실패",
-              showConfirmButton: false,
-              timer: 1500
-            });
-            return Promise.reject(error);
-          }
-        }
-      },
-
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      console.log("confirm result :>> ", result);
-      if (result.isConfirmed) {
-        console.log("result.value= ", result.value);
-        Swal.fire({
-          title: `${result.value.nickname}으로\n변경되었습니다!`
-        });
-      }
-      return result.value.nickname;
-    });
-
-  const toggleFn = async ({ feedId, feedVisibility }) => {
-    await axios.patch(`http://localhost:4001/feed/${feedId}`, { visibility: !feedVisibility });
-  };
-
-  const toggleVisibilityMuation = useMutation({
-    mutationFn: toggleFn,
-    onSuccess: () => queryClient.invalidateQueries(["feeds"]),
-    onError: (error) => console.log("error :>> ", error)
-  });
-
-  const deleteFn = async ({ feedId }) => {
-    await axios.delete(`http://localhost:4001/feed/${feedId}`);
-  };
-
-  const deleteItemMutaion = useMutation({
-    mutationFn: deleteFn,
-    onSuccess: () => queryClient.invalidateQueries(["feeds"]),
-    onError: (error) => console.log("error :>> ", error)
-  });
+  const { data: feeds, hasNextPage, fetchNextPage, isFetchingNextPage } = useMyFeedsInfiniteQuery();
+  const { myFeedRef, confirmUpdate } = useMyPage(hasNextPage, isFetchingNextPage, fetchNextPage);
 
   return (
     <MyPageWrapper>
@@ -148,39 +16,13 @@ const Mypage = () => {
       <RideItemList>
         {feeds?.length ? (
           feeds.map((feed) => {
-            console.log("feed :>> ", feed);
-            return (
-              <RideItem key={feed.id}>
-                <RideItemTextWrap>
-                  <RideItemTitle>{feed.BICYCLE_PATH}</RideItemTitle>
-                  <RideItemDate>최종 종주 일자 : {feed.created_time.split(" ")[0]}</RideItemDate>
-                  {user.id == feed.userId ? (
-                    <RideItemButtonWrap>
-                      <RideItemButton
-                        onClick={() =>
-                          toggleVisibilityMuation.mutate({ feedId: feed.id, feedVisibility: feed.visibility })
-                        }
-                        $isToggle={true}
-                      >
-                        {feed.visibility ? "비공개로 전환" : "공개로 전환"}
-                      </RideItemButton>
-                      <RideItemButton onClick={() => deleteItemMutaion.mutate({ feedId: feed.id })}>
-                        삭제
-                      </RideItemButton>
-                    </RideItemButtonWrap>
-                  ) : (
-                    <></>
-                  )}
-                </RideItemTextWrap>
-                <KakaoMap roadLine={feed.roadLine} />
-              </RideItem>
-            );
+            return <RideItem key={feed.id} feed={feed} />;
           })
         ) : (
           <p>등록한 종주점이 없습니다!</p>
         )}
       </RideItemList>
-      <FetchTrigger ref={ref} />
+      <FetchTrigger ref={myFeedRef} />
     </MyPageWrapper>
   );
 };
@@ -221,57 +63,6 @@ const RideItemList = styled.ul`
   justify-content: center;
   align-items: center;
   gap: 30px;
-`;
-
-const RideItem = styled.li`
-  background-color: black;
-  border-radius: 30px 0px 0px 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 50px;
-  padding-left: 30px;
-  height: 300px;
-  color: white;
-`;
-
-const RideItemTextWrap = styled.div`
-  padding: 40px 0px 30px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 60px;
-`;
-
-const RideItemTitle = styled.h3`
-  font-size: 36px;
-  width: 400px;
-`;
-
-const RideItemDate = styled.h4`
-  font-size: 20px;
-  width: 400px;
-  color: #d4d4d4;
-`;
-
-const RideItemButtonWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 5px;
-`;
-
-const RideItemButton = styled.button`
-  cursor: pointer;
-  background-color: ${({ $isToggle }) => ($isToggle ? "#1b1b1b" : "white")};
-  color: ${({ $isToggle }) => ($isToggle ? "white" : "black")};
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;
-  &:hover {
-    filter: brightness(0.8);
-  }
 `;
 
 const FetchTrigger = styled.div`
