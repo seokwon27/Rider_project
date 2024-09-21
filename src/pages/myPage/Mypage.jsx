@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useMyFeedsInfiniteQuery } from "../../queries/infiniteQueries";
-import useMyPage from "./useMyPage";
+import useMyPage from "../../hooks/useMyPage";
 import RideItem from "./RideItem";
 
 const Mypage = () => {

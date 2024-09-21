@@ -1,8 +1,8 @@
 import { useInView } from "react-intersection-observer";
 import Swal from "sweetalert2";
-import useUserStore from "../../store/useUserStore";
-import { updateProfile } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/useUserStore";
+import { updateProfile } from "../api/auth";
 
 const useMyPage = (hasNextPage, isFetchingNextPage, fetchNextPage) => {
   const navigate = useNavigate();
