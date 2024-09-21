@@ -1,3 +1,5 @@
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -27,7 +29,9 @@ const TopButton = () => {
   return (
     showButton && (
       <ScrollContainer>
-        <Button onClick={scrollToTop}>∧</Button>
+        <Button onClick={scrollToTop}>
+          <FontAwesomeIcon icon={faAngleUp} />
+        </Button>
       </ScrollContainer>
     )
   );
@@ -44,11 +48,12 @@ const ScrollContainer = styled.div`
 
 const Button = styled.button`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
   padding: 15px 18px;
   background-color: #000;
   color: #fff;
-  border: 1px dotted rgb(210, 204, 193);
+  border: 1px rgb(210, 204, 193);
+  box-shadow: 0px 0px 15px 1px rgba(201, 195, 183, 0.288);
   border-radius: 50%;
   cursor: pointer;
   &:hover {
