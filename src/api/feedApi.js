@@ -5,8 +5,9 @@ export const getFeedPages = async ({ pageParam = 1 }) => {
   return response.data;
 };
 
-export const updateThumb = async (FeedId, newThumb) => {
-  await feedInstance.patch(`/feed/${FeedId}`, { thumb: newThumb });
+export const updateThumb = async ({ feedId, currentThumb, isUserLiked, user }) => {
+  const newThumb = isUserLiked ? [...currentThumb].filter((el) => el !== user.id) : [...currentThumb, user.id];
+  await feedInstance.patch(`/feed/${feedId}`, { thumb: newThumb });
 };
 
 export const getFeedsByPageNum = async ({ pageParam = 1, userId }) => {

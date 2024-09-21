@@ -1,29 +1,15 @@
 import Thumb from "./Thumb";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import RidingMap from "./RidingMap";
 import { useInView } from "react-intersection-observer";
-import { getFeedPages } from "../../api/feedApi";
 import { useState } from "react";
 import ModalMap from "./ModalMap";
+import { useAllFeedsInfiniteQuery } from "../../queries/infiniteQueries";
 
 const Posting = () => {
   const { kakao } = window;
   const [selectedPost, setSelectedPost] = useState();
-
-  const {
-    data: feeds,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage
-  } = useInfiniteQuery({
-    queryKey: ["feeds"],
-    queryFn: getFeedPages,
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage.length === 5 ? pages.length + 1 : undefined;
-    },
-    select: (data) => data.pages.flat()
-  });
+  const { data: feeds, hasNextPage, fetchNextPage, isFetchingNextPage } = useAllFeedsInfiniteQuery();
 
   const { ref } = useInView({
     // ref element가 0.5(절반)만큼 보이면 onChange 함수 실행
