@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 
-const RidingMap = ({ setModalOpen, showMap, id, roadLine }) => {
+const RidingMap = ({ setSelectedPost, showMap, id, roadLine }) => {
   useEffect(() => {
     showMap(id, roadLine);
   }, []);
 
-  const showModal = () => {
-    setModalOpen(true);
+  const OpenModal = () => {
+    setSelectedPost({ id, roadLine });
   };
 
-  return <Map id={id} onClick={showModal}></Map>;
+  return <Map id={id} onClick={OpenModal}></Map>;
 };
 
 export default RidingMap;

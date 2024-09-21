@@ -3,26 +3,26 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const ModalMap = ({ showMap, setModalOpen, id, roadLine }) => {
+const ModalMap = ({ showMap, setSelectedPost, id, roadLine }) => {
+  useEffect(() => {
+    showMap(id + "_map", roadLine);
+  }, []);
+
   const outSection = useRef();
 
-  const outSectionClose = (e) => {
+  const closeOutSection = (e) => {
     if (outSection.current === e.target) {
       closeModal();
     }
   };
 
   const closeModal = () => {
-    setModalOpen(false);
+    setSelectedPost(null);
   };
 
-  useEffect(() => {
-    showMap(id, roadLine);
-  }, []);
-
   return (
-    <Layer ref={outSection} onClick={outSectionClose}>
-      <Map id={id}>
+    <Layer ref={outSection} onClick={closeOutSection}>
+      <Map id={id + "_map"}>
         <ClostBtn onClick={closeModal}>
           <FontAwesomeIcon icon={faXmark} />
         </ClostBtn>
@@ -45,21 +45,21 @@ const Layer = styled.div`
 `;
 
 const ClostBtn = styled.p`
+  z-index: 200;
   position: absolute;
   font-size: 30px;
   right: 15px;
   top: 10px;
-  color: white;
+  color: black;
   cursor: pointer;
 `;
 
 const Map = styled.div`
   width: 1200px;
-  height: 1000px;
+  height: 1100px;
   z-index: 100;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid white;
 `;

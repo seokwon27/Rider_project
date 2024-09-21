@@ -5,12 +5,12 @@ import RandomImg from "./RandomImg";
 import RidingMap from "./RidingMap";
 import { useInView } from "react-intersection-observer";
 import { getFeedPages } from "../../api/feedApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalMap from "./ModalMap";
 
 const Posting = () => {
   const { kakao } = window;
-  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState();
 
   const {
     data: feeds,
@@ -36,8 +36,6 @@ const Posting = () => {
     }
   });
 
-  let map;
-
   // 지도 생성 함수
   const showMap = (id, roadLine) => {
     const container = document.getElementById(id);
@@ -51,10 +49,10 @@ const Posting = () => {
         (roadLine.length <= 500 && 9) ||
         (roadLine.length >= 1000 && 11) ||
         (roadLine.length >= 3000 && 12),
-      draggable: false
+      draggable: selectedPost ? true : false
     };
 
-    map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
 
     const linePath = [];
     roadLine.forEach((el) => linePath.push(new kakao.maps.LatLng(el.LINE_XP, el.LINE_YP)));
@@ -76,8 +74,12 @@ const Posting = () => {
         feeds.map((feed) => {
           return (
             <FeedContainder key={feed.id}>
-              <ContentsContainer>
-                <RandomImg />
+              <ContentsContainer
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0,0,0,0.65)), url(${feed.profile_img})`
+                }}
+              >
+                <Profile src={feed.profile_img} alt="profile_img" />
                 <RiderNameContainer>
                   <RiderName>{feed.nickname}</RiderName>라이더 님
                 </RiderNameContainer>
@@ -87,17 +89,21 @@ const Posting = () => {
                   <Thumb currentFeedId={feed.id} currentThumb={feed.thumb} thumbUser={feed.userId} />
                 </DetailContainer>
               </ContentsContainer>
-              <RidingMap setModalOpen={setModalOpen} showMap={showMap} id={feed.id} roadLine={feed.roadLine} />
-              {modalOpen && (
-                <ModalMap setModalOpen={setModalOpen} showMap={showMap} id={feed.id} roadLine={feed.roadLine} />
-              )}
+              <RidingMap setSelectedPost={setSelectedPost} showMap={showMap} id={feed.id} roadLine={feed.roadLine} />
             </FeedContainder>
           );
         })
       ) : (
         <p>피드가 없습니다.</p>
       )}
-
+      {selectedPost && (
+        <ModalMap
+          setSelectedPost={setSelectedPost}
+          showMap={showMap}
+          id={selectedPost.id}
+          roadLine={selectedPost.roadLine}
+        />
+      )}
       <div ref={ref} />
     </div>
   );
@@ -116,13 +122,15 @@ const ContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #000;
   color: #fff;
   width: 450px;
   height: 230px;
   position: relative;
   padding-left: 100px;
   margin-left: 80px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 const DetailContainer = styled.div`
@@ -146,4 +154,12 @@ const RiderName = styled.p`
 const RidingRoad = styled.p`
   font-size: 20px;
   padding-left: 40px;
+`;
+
+const Profile = styled.img`
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  position: absolute;
+  left: -120px;
 `;
