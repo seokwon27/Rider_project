@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
           )}
         </NavContainer>
       </StyledHeader>
-      <Main>{children}</Main>
+      <main>{children}</main>
     </Container>
   );
 };
@@ -97,11 +97,12 @@ const StyledLink = styled(Link)`
 `;
 
 const LogoutButton = styled.button`
-  background-color: gray;
+  background-color: #ffffff;
   color: black;
   font-weight: normal;
   padding: 0.5rem 1.25rem;
   border-radius: 9999px;
+  border: none;
   &:hover {
     filter: invert(1);
   }
@@ -117,5 +118,3 @@ const LoginButton = styled(StyledLink)`
     filter: invert(1);
   }
 `;
-
-const Main = styled.main``;

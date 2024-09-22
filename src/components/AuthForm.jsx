@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 
@@ -19,31 +18,20 @@ const AuthForm = ({ mode, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await onSubmit(formData);
-      if (response.success) {
-        toast.success(`${mode === "login" ? "로그인" : "회원가입"} 성공!`, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      } else {
-        toast.error(`Error: ${response.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
-    } catch (error) {
-      toast.error("오류가 발생했습니다. 다시 시도해 주세요.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000
-      });
-    }
+    onSubmit(formData);
   };
 
   return (
     <Wrapper onSubmit={handleSubmit}>
-      <ToastContainer />
-      <StyledInput type="text" name="id" value={formData.id} onChange={handleChange} placeholder="아이디" required />
+      <StyledInput
+        type="text"
+        name="id"
+        value={formData.id}
+        onChange={handleChange}
+        placeholder="아이디"
+        required
+        autocomplete="current-password"
+      />
       <StyledInput
         type="password"
         name="password"
@@ -51,6 +39,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         onChange={handleChange}
         placeholder="비밀번호"
         required
+        autocomplete="current-password"
       />
       {mode === "signup" && (
         <StyledInput
@@ -60,6 +49,7 @@ const AuthForm = ({ mode, onSubmit }) => {
           onChange={handleChange}
           placeholder="닉네임"
           required
+          autocomplete="current-password"
         />
       )}
       <StyledButton type="submit">{mode === "login" ? "로그인하기" : "회원가입하기"}</StyledButton>
@@ -83,6 +73,7 @@ const StyledInput = styled.input`
   caret-color: transparent;
   margin-bottom: 16px;
   transition: opacity 0.3s, box-shadow 0.3s;
+  border: none;
 
   &:focus {
     opacity: 0.8;
@@ -92,7 +83,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  width: 100%;
+  width: 109%;
   font-size: 1rem;
   font-weight: 300;
   background-color: black;
@@ -100,6 +91,7 @@ const StyledButton = styled.button`
   padding: 16px;
   border-radius: 9999px;
   transition: filter 0.2s, box-shadow 0.2s;
+  border: none;
 
   &:hover {
     filter: invert(1);
