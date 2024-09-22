@@ -28,7 +28,7 @@ const Thumb = ({ currentFeedId, currentThumb }) => {
 
   return (
     <div>
-      <Button onClick={() => addThumb(currentFeedId)} disabled={isUserLiked ? false : true}>
+      <Button onClick={() => addThumb(currentFeedId)}>
         {isUserLiked ? <FontAwesomeIcon icon={solidThumb} /> : <FontAwesomeIcon icon={regularThumb} />}
       </Button>
       {thumbCount}

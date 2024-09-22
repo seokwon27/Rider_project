@@ -15,7 +15,6 @@ db.json
 db1.json
 db2.json
 
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

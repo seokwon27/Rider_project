@@ -101,6 +101,7 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
     setCurrentPage(1);
   }, [filterData]);
 
+  //결과카드 좌표값 중앙설정
   const getCoord = async (data) => {
     const result = await getRoadPath(data);
     setCenterCoord({ lat: result.latitude, lng: result.longitude });

@@ -32,7 +32,6 @@ const Home = () => {
   const [amenityDatas, setAmenityDatas] = useState([]);
   // console.log("amenityDatas =>", amenityDatas);
 
-  // console.log(filterData);
   //현위치
   // useEffect(() => {
   //   setCenterCoord(location.center);
