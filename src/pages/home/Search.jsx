@@ -4,9 +4,7 @@ import { getSearchRoad } from "../../api/FilterRoadInformation";
 const Search = ({ selectedButton, setFilterData, searchValue, setSearchValue }) => {
   const handleSearch = async (e) => {
     e.preventDefault();
-    // console.log(searchValue);
     const response = await getSearchRoad(searchValue, selectedButton);
-    // console.log(response);
     setFilterData(response);
   };
 
@@ -41,7 +39,6 @@ const SearchDiv = styled.div`
 `;
 
 const SearchInput = styled.input`
-  /* flex: 2; */
   display: flex;
   width: 70%;
   background-color: #000000;
@@ -54,7 +51,6 @@ const SearchInput = styled.input`
 `;
 
 const SearchButton = styled.button`
-  /* flex: 1; */
   display: flex;
   justify-content: center;
   width: 20%;
