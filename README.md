@@ -15,6 +15,106 @@
 
 <details>
 <summary>폴더구조</summary>
+📦Rider_project
+ ┣ 📂public
+ ┃ ┣ 📜airInjectorMarker.png
+ ┃ ┣ 📜anAirInjector.png
+ ┃ ┣ 📜bike.png
+ ┃ ┣ 📜certificateMarker.png
+ ┃ ┣ 📜CertificationCenter.png
+ ┃ ┣ 📜CurrentLocation.png
+ ┃ ┣ 📜cyclist.png
+ ┃ ┣ 📜favicon.svg
+ ┃ ┣ 📜finishImg.png
+ ┃ ┣ 📜startImg.png
+ ┃ ┣ 📜toilet.png
+ ┃ ┣ 📜toiletMarker.png
+ ┃ ┣ 📜vite.svg
+ ┃ ┣ 📜waterSupply.png
+ ┃ ┗ 📜waterSupplyMarker.png
+ ┣ 📂src
+ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📜auth.js
+ ┃ ┃ ┣ 📜feedApi.js
+ ┃ ┃ ┣ 📜FilterRoadInformation.js
+ ┃ ┃ ┗ 📜weatherApi.js
+ ┃ ┣ 📂assets
+ ┃ ┃ ┣ 📜downScroll.png
+ ┃ ┃ ┣ 📜homeIcon.svg
+ ┃ ┃ ┣ 📜landing_background.png
+ ┃ ┃ ┣ 📜landing_firstIcon.png
+ ┃ ┃ ┣ 📜landing_firstImg.png
+ ┃ ┃ ┣ 📜landing_secondIcon.png
+ ┃ ┃ ┗ 📜landing_secondImg.png
+ ┃ ┣ 📂axiosInstance
+ ┃ ┃ ┣ 📜authInstance.js
+ ┃ ┃ ┣ 📜feed.js
+ ┃ ┃ ┣ 📜information.js
+ ┃ ┃ ┗ 📜weatherInstance.js
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┗ 📜KakaoMap.jsx
+ ┃ ┃ ┣ 📜AuthForm.jsx
+ ┃ ┃ ┣ 📜GlobalLoading.jsx
+ ┃ ┃ ┣ 📜Layout.jsx
+ ┃ ┃ ┗ 📜ProtectedRoute.jsx
+ ┃ ┣ 📂constants
+ ┃ ┃ ┗ 📜homeConstants.js
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜useGeoLocation.jsx
+ ┃ ┃ ┣ 📜useInsertFeed.jsx
+ ┃ ┃ ┣ 📜useLandingPage.jsx
+ ┃ ┃ ┗ 📜useMyPage.jsx
+ ┃ ┣ 📂pages
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┣ 📜Login.jsx
+ ┃ ┃ ┃ ┗ 📜Signup.jsx
+ ┃ ┃ ┣ 📂feed
+ ┃ ┃ ┃ ┣ 📜Feed.jsx
+ ┃ ┃ ┃ ┣ 📜ModalMap.jsx
+ ┃ ┃ ┃ ┣ 📜Posting.jsx
+ ┃ ┃ ┃ ┣ 📜RidingMap.jsx
+ ┃ ┃ ┃ ┣ 📜Thumb.jsx
+ ┃ ┃ ┃ ┗ 📜TopButton.jsx
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┃ ┣ 📜Filter.jsx
+ ┃ ┃ ┃ ┣ 📜Home.jsx
+ ┃ ┃ ┃ ┣ 📜List.jsx
+ ┃ ┃ ┃ ┣ 📜Pagination.jsx
+ ┃ ┃ ┃ ┗ 📜Search.jsx
+ ┃ ┃ ┣ 📂landing
+ ┃ ┃ ┃ ┗ 📜Landing.jsx
+ ┃ ┃ ┗ 📂myPage
+ ┃ ┃ ┃ ┣ 📜Mypage.jsx
+ ┃ ┃ ┃ ┗ 📜RideItem.jsx
+ ┃ ┣ 📂queries
+ ┃ ┃ ┣ 📜infiniteQueries.jsx
+ ┃ ┃ ┣ 📜mutaions.jsx
+ ┃ ┃ ┗ 📜query.keys.js
+ ┃ ┣ 📂shared
+ ┃ ┃ ┗ 📜Router.jsx
+ ┃ ┣ 📂store
+ ┃ ┃ ┗ 📜useUserStore.js
+ ┃ ┣ 📂utils
+ ┃ ┃ ┣ 📜calculateTotalDistance.js
+ ┃ ┃ ┗ 📜scrollToTargetRef.js
+ ┃ ┣ 📜App.jsx
+ ┃ ┣ 📜index.css
+ ┃ ┗ 📜main.jsx
+ ┣ 📜.env.local
+ ┣ 📜.gitignore
+ ┣ 📜.prettierignore
+ ┣ 📜.prettierrc
+ ┣ 📜db.json
+ ┣ 📜db1.json
+ ┣ 📜db2.json
+ ┣ 📜eslint.config.js
+ ┣ 📜index.html
+ ┣ 📜package.json
+ ┣ 📜README.md
+ ┣ 📜vercel.json
+ ┣ 📜vite.config.js
+ ┗ 📜yarn.lock
  </details>
 
 <br/>
@@ -129,7 +229,7 @@ id생성방식을 변경하여 다른 id값을 지니게 해 문제를 해결하
 ### 김서연
 
 ```
-
+ 팀원 간의 패키지 관리 방식, CSS 스타일링 통일 필요성을 느꼈습니다. 다른 페이지에서도 사용되는 로직을 논의할 필요성을 느꼈습니다.
 ```
 
 <br/>
