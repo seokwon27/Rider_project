@@ -179,7 +179,7 @@ const NoListDiv = styled.div`
 const CardList = styled.div`
   display: flex;
   width: 90%;
-  height: 100%;
+  /* height: 100%; */
   flex-direction: column;
   gap: 10px;
   /* background-color: #242424; */

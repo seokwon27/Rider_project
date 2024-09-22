@@ -113,7 +113,7 @@ const Home = () => {
             showConfirmButton: true,
             showCancelButton: true,
             confirmButtonText: "피드 보러가기",
-            cancelButtonText: "취소"
+            cancelButtonText: "확인"
           }).then((result) => {
             if (result.isConfirmed) {
               navigate("/feed");
@@ -121,19 +121,12 @@ const Home = () => {
           });
         },
         onError: (err) => {
-          if (err.message === "이미 종주점을 찍었습니다.") {
-            Swal.fire({
-              title: "이미 종주점을 찍었습니다.",
-              confirmButtonText: "확인"
-            });
-          } else {
-            Swal.fire({
-              title: "오류 발생",
-              text: "종주점을 저장하는 중 오류가 발생했습니다.",
-              icon: "error",
-              confirmButtonText: "확인"
-            });
-          }
+          Swal.fire({
+            title: "오류 발생",
+            text: "종주점을 저장하는 중 오류가 발생했습니다.",
+            icon: "error",
+            confirmButtonText: "확인"
+          });
         }
       });
     } else {
@@ -386,11 +379,13 @@ const CurrentLocation = styled.div`
 
 const Container = styled.div`
   background-color: #121212;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   /* gap: 20px; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 93vh;
+
   /* height: 70%; */
   /* margin: 20px auto; */
   /* padding: 20px; */
@@ -410,20 +405,23 @@ const SearchFilterDiv = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  max-height: 100%;
-  min-height: 100vh;
+  /* max-height: 100%; */
+  /* min-height: 100vh; */
+  height: 93vh;
+
   width: 23%;
   /* height: 100%; */
   border-radius: 10px;
   background: linear-gradient(180deg, #667386 0%, #030303 100%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 15px;
 `;
 
 const MapContainer = styled.div`
-  width: 76%;
-  height: 960vh;
-  max-height: 960px;
+  width: 77%;
+  /* height: 960vh; */
+  height: 93vh;
+  /* max-height: 960px; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
