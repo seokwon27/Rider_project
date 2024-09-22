@@ -1,5 +1,5 @@
 import useUserStore from "../store/useUserStore";
-import authInstance from "../axiosInstance/Auth";
+import authInstance from "../axiosInstance/authInstance";
 
 export const register = async (userData) => {
   const response = await authInstance.post("/register", userData);
