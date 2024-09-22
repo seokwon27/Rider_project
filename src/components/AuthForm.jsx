@@ -17,9 +17,27 @@ const AuthForm = ({ mode, onSubmit }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    try {
+      const response = await onSubmit(formData);
+      if (response.success) {
+        toast.success(`${mode === "login" ? "로그인" : "회원가입"} 성공!`, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      } else {
+        toast.error(`Error: ${response.message}`, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+    } catch (error) {
+      toast.error("오류가 발생했습니다. 다시 시도해 주세요.", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000
+      });
+    }
   };
 
   return (
@@ -68,7 +86,7 @@ const StyledInput = styled.input`
 
   &:focus {
     opacity: 0.8;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 4px rgb(141, 198, 255);
+    box-shadow: 0 0 0 1px #ffffff, 0 0 0 4px rgb(112, 112, 112);
     outline: none;
   }
 `;
