@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 
 const AuthForm = ({ mode, onSubmit }) => {
@@ -22,6 +24,7 @@ const AuthForm = ({ mode, onSubmit }) => {
 
   return (
     <Wrapper onSubmit={handleSubmit}>
+      <ToastContainer />
       <StyledInput type="text" name="id" value={formData.id} onChange={handleChange} placeholder="아이디" required />
       <StyledInput
         type="password"
