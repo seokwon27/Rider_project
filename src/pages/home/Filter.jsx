@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { getFilterRoad, getSearchRoad } from "../../api/FilterRoadInformation";
+import { HOME_BUTTONS_LIST } from "../../constants/homeConstants";
 
 const Filter = ({ setFilterData, selectedButton, setSelectedButton, searchValue }) => {
-  const buttonsList = ["전체", "자전거길", "화장실", "공기주입기", "인증센터", "급수대"];
-
   const handleFilterButton = async (button) => {
     setSelectedButton(button);
     try {
@@ -21,7 +20,7 @@ const Filter = ({ setFilterData, selectedButton, setSelectedButton, searchValue 
 
   return (
     <FilterDiv>
-      {buttonsList.map((button) => (
+      {HOME_BUTTONS_LIST.map((button) => (
         <FilterButton key={button} onClick={() => handleFilterButton(button)} $isSelected={selectedButton === button}>
           {button}
         </FilterButton>

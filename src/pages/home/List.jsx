@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Pagination from "./Pagination";
 import { getAmenities } from "../../api/FilterRoadInformation";
+import informationInstance from "../../axiosInstance/information";
 
 const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCenterCoord }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,21 +15,18 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
   const indexOfLastItem = currentPage * PAGE_ITEMS;
   const indexOfFirstItem = indexOfLastItem - PAGE_ITEMS;
   const currentItems = filterData.slice(indexOfFirstItem, indexOfLastItem);
-  // console.log("currentItems =>", currentItems);
 
   const getRoadPath = async (data) => {
     let result;
-    const bicycle_road = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/bicycle_road`);
-    const amenities = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/amenities`);
+    const bicycle_road = await informationInstance.get(`/bicycle_road`);
+    const amenities = await informationInstance.get(`/amenities`);
     data.ROAD_SN
       ? (result = bicycle_road.data.find((el) => el.ROAD_SN === data.ROAD_SN))
       : (result = amenities.data.find((el) => el.id === data.id));
-    // console.log(result);
     if (result.roadLine) {
       setPolyline(result);
       const name = await result.BICYCLE_PATH.slice(0, 2);
-      const amenitiesData = await axios.get(`${import.meta.env.VITE_PATH_INFORMATION_URL}/amenities?name_like=${name}`);
-      console.log(name);
+      const amenitiesData = await informationInstance.get(`/amenities?name_like=${name}`);
 
       setAmenityDatas(amenitiesData.data);
     }
@@ -45,18 +43,11 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
           })
           .map((el) => getRoadPath(el))
       );
-
       const marker = result.map((el) => {
         return { title: el.Classification, latlng: { lat: el.latitude, lng: el.longitude } };
       });
       setPositions(marker);
     };
-
-    fetchCurrentItems();
-  }, [filterData, currentPage]);
-
-  //주소값 할당하기
-  useEffect(() => {
     const getAllRoadData = async () => {
       for (const item of currentItems) {
         if (item.id && !address[item.id]) {
@@ -76,7 +67,6 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
         }
       }
     };
-
     const getAddressFromCoords = (lat, lng, id) => {
       const geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -92,10 +82,10 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
         }
       });
     };
+
+    fetchCurrentItems();
     getAllRoadData();
   }, [filterData, currentPage]);
-
-  useEffect(() => {}, [filterData, currentPage]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -115,7 +105,6 @@ const List = ({ filterData, setPolyline, setPositions, setAmenityDatas, setCente
             <Card
               key={index}
               onClick={() => {
-                // getRoadPath(data);
                 getCoord(data);
               }}
             >
@@ -179,10 +168,8 @@ const NoListDiv = styled.div`
 const CardList = styled.div`
   display: flex;
   width: 90%;
-  /* height: 100%; */
   flex-direction: column;
   gap: 10px;
-  /* background-color: #242424; */
 `;
 const CardImage = styled.img`
   display: flex;
