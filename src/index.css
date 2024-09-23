@@ -1,3 +1,9 @@
+:root {
+  background-color: #121212;
+  color: white;
+  font-weight: 300;
+}
+
 html,
 body,
 div,
@@ -121,4 +127,63 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+/* 마이페이지 sweetAlert 관련 커스텀스타일 */
+/* 팝업 배경색 설정 */
+.swal2-popup {
+  background-color: #505050 !important;
+  padding: 20px !important; /* 팝업에 적당한 패딩 추가 */
+  box-sizing: border-box;
+  justify-items: center;
+}
+
+/* 팝업 타이틀 설정 */
+.swal2-title {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* 확인 버튼 스타일 */
+.confirm-button-class {
+  background-color: white !important;
+  color: black !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 130px;
+}
+
+/* 취소 버튼 스타일 */
+.cancel-button-class {
+  background-color: gray !important;
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 130px;
+}
+
+/* 입력 필드 스타일 */
+.input-field-class {
+  background-color: gray !important;
+  color: white !important;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%; /* 부모 요소의 너비에 맞게 설정 */
+  max-width: 300px; /* 입력 필드의 최대 너비를 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  box-sizing: border-box; /* 패딩과 너비 계산 */
+}
+
+.swal2-validation-message {
+  background-color: #505050;
+  color: white;
+}
+
+.swal2-confirm {
+  background-color: white !important;
+  color: black;
 }

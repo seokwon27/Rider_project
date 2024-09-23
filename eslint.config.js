@@ -30,7 +30,9 @@ export default [
       ...reactHooks.configs.recommended.rules,
       "react/jsx-no-target-blank": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "no-unused-vars": "off",
+      "react-hooks/exhaustive-deps": "off"
     }
   }
 ];
