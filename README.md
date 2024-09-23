@@ -15,106 +15,106 @@
 
 <details>
 <summary>폴더구조</summary>
-📦Rider_project
- ┣ 📂public
- ┃ ┣ 📜airInjectorMarker.png
- ┃ ┣ 📜anAirInjector.png
- ┃ ┣ 📜bike.png
- ┃ ┣ 📜certificateMarker.png
- ┃ ┣ 📜CertificationCenter.png
- ┃ ┣ 📜CurrentLocation.png
- ┃ ┣ 📜cyclist.png
- ┃ ┣ 📜favicon.svg
- ┃ ┣ 📜finishImg.png
- ┃ ┣ 📜startImg.png
- ┃ ┣ 📜toilet.png
- ┃ ┣ 📜toiletMarker.png
- ┃ ┣ 📜vite.svg
- ┃ ┣ 📜waterSupply.png
- ┃ ┗ 📜waterSupplyMarker.png
- ┣ 📂src
- ┃ ┣ 📂api
- ┃ ┃ ┣ 📜auth.js
- ┃ ┃ ┣ 📜feedApi.js
- ┃ ┃ ┣ 📜FilterRoadInformation.js
- ┃ ┃ ┗ 📜weatherApi.js
- ┃ ┣ 📂assets
- ┃ ┃ ┣ 📜downScroll.png
- ┃ ┃ ┣ 📜homeIcon.svg
- ┃ ┃ ┣ 📜landing_background.png
- ┃ ┃ ┣ 📜landing_firstIcon.png
- ┃ ┃ ┣ 📜landing_firstImg.png
- ┃ ┃ ┣ 📜landing_secondIcon.png
- ┃ ┃ ┗ 📜landing_secondImg.png
- ┃ ┣ 📂axiosInstance
- ┃ ┃ ┣ 📜authInstance.js
- ┃ ┃ ┣ 📜feed.js
- ┃ ┃ ┣ 📜information.js
- ┃ ┃ ┗ 📜weatherInstance.js
- ┃ ┣ 📂components
- ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┗ 📜KakaoMap.jsx
- ┃ ┃ ┣ 📜AuthForm.jsx
- ┃ ┃ ┣ 📜GlobalLoading.jsx
- ┃ ┃ ┣ 📜Layout.jsx
- ┃ ┃ ┗ 📜ProtectedRoute.jsx
- ┃ ┣ 📂constants
- ┃ ┃ ┗ 📜homeConstants.js
- ┃ ┣ 📂hooks
- ┃ ┃ ┣ 📜useGeoLocation.jsx
- ┃ ┃ ┣ 📜useInsertFeed.jsx
- ┃ ┃ ┣ 📜useLandingPage.jsx
- ┃ ┃ ┗ 📜useMyPage.jsx
- ┃ ┣ 📂pages
- ┃ ┃ ┣ 📂auth
- ┃ ┃ ┃ ┣ 📜Login.jsx
- ┃ ┃ ┃ ┗ 📜Signup.jsx
- ┃ ┃ ┣ 📂feed
- ┃ ┃ ┃ ┣ 📜Feed.jsx
- ┃ ┃ ┃ ┣ 📜ModalMap.jsx
- ┃ ┃ ┃ ┣ 📜Posting.jsx
- ┃ ┃ ┃ ┣ 📜RidingMap.jsx
- ┃ ┃ ┃ ┣ 📜Thumb.jsx
- ┃ ┃ ┃ ┗ 📜TopButton.jsx
- ┃ ┃ ┣ 📂home
- ┃ ┃ ┃ ┣ 📜Filter.jsx
- ┃ ┃ ┃ ┣ 📜Home.jsx
- ┃ ┃ ┃ ┣ 📜List.jsx
- ┃ ┃ ┃ ┣ 📜Pagination.jsx
- ┃ ┃ ┃ ┗ 📜Search.jsx
- ┃ ┃ ┣ 📂landing
- ┃ ┃ ┃ ┗ 📜Landing.jsx
- ┃ ┃ ┗ 📂myPage
- ┃ ┃ ┃ ┣ 📜Mypage.jsx
- ┃ ┃ ┃ ┗ 📜RideItem.jsx
- ┃ ┣ 📂queries
- ┃ ┃ ┣ 📜infiniteQueries.jsx
- ┃ ┃ ┣ 📜mutaions.jsx
- ┃ ┃ ┗ 📜query.keys.js
- ┃ ┣ 📂shared
- ┃ ┃ ┗ 📜Router.jsx
- ┃ ┣ 📂store
- ┃ ┃ ┗ 📜useUserStore.js
- ┃ ┣ 📂utils
- ┃ ┃ ┣ 📜calculateTotalDistance.js
- ┃ ┃ ┗ 📜scrollToTargetRef.js
- ┃ ┣ 📜App.jsx
- ┃ ┣ 📜index.css
- ┃ ┗ 📜main.jsx
- ┣ 📜.env.local
- ┣ 📜.gitignore
- ┣ 📜.prettierignore
- ┣ 📜.prettierrc
- ┣ 📜db.json
- ┣ 📜db1.json
- ┣ 📜db2.json
- ┣ 📜eslint.config.js
- ┣ 📜index.html
- ┣ 📜package.json
- ┣ 📜README.md
- ┣ 📜vercel.json
- ┣ 📜vite.config.js
- ┗ 📜yarn.lock
+📦Rider_project<br />
+ ┣ 📂public<br />
+ ┃ ┣ 📜airInjectorMarker.png<br />
+ ┃ ┣ 📜anAirInjector.png<br />
+ ┃ ┣ 📜bike.png<br />
+ ┃ ┣ 📜certificateMarker.png<br />
+ ┃ ┣ 📜CertificationCenter.png<br />
+ ┃ ┣ 📜CurrentLocation.png<br />
+ ┃ ┣ 📜cyclist.png<br />
+ ┃ ┣ 📜favicon.svg<br />
+ ┃ ┣ 📜finishImg.png<br />
+ ┃ ┣ 📜startImg.png<br />
+ ┃ ┣ 📜toilet.png<br />
+ ┃ ┣ 📜toiletMarker.png<br />
+ ┃ ┣ 📜vite.svg<br />
+ ┃ ┣ 📜waterSupply.png<br />
+ ┃ ┗ 📜waterSupplyMarker.png<br />
+ ┣ 📂src<br />
+ ┃ ┣ 📂api<br />
+ ┃ ┃ ┣ 📜auth.js<br />
+ ┃ ┃ ┣ 📜feedApi.js<br />
+ ┃ ┃ ┣ 📜FilterRoadInformation.js<br />
+ ┃ ┃ ┗ 📜weatherApi.js<br />
+ ┃ ┣ 📂assets<br />
+ ┃ ┃ ┣ 📜downScroll.png<br />
+ ┃ ┃ ┣ 📜homeIcon.svg<br />
+ ┃ ┃ ┣ 📜landing_background.png<br />
+ ┃ ┃ ┣ 📜landing_firstIcon.png<br />
+ ┃ ┃ ┣ 📜landing_firstImg.png<br />
+ ┃ ┃ ┣ 📜landing_secondIcon.png<br />
+ ┃ ┃ ┗ 📜landing_secondImg.png<br />
+ ┃ ┣ 📂axiosInstance<br />
+ ┃ ┃ ┣ 📜authInstance.js<br />
+ ┃ ┃ ┣ 📜feed.js<br />
+ ┃ ┃ ┣ 📜information.js<br />
+ ┃ ┃ ┗ 📜weatherInstance.js<br />
+ ┃ ┣ 📂components<br />
+ ┃ ┃ ┣ 📂common<br />
+ ┃ ┃ ┃ ┗ 📜KakaoMap.jsx<br />
+ ┃ ┃ ┣ 📜AuthForm.jsx<br />
+ ┃ ┃ ┣ 📜GlobalLoading.jsx<br />
+ ┃ ┃ ┣ 📜Layout.jsx<br />
+ ┃ ┃ ┗ 📜ProtectedRoute.jsx<br />
+ ┃ ┣ 📂constants<br />
+ ┃ ┃ ┗ 📜homeConstants.js<br />
+ ┃ ┣ 📂hooks<br />
+ ┃ ┃ ┣ 📜useGeoLocation.jsx<br />
+ ┃ ┃ ┣ 📜useInsertFeed.jsx<br />
+ ┃ ┃ ┣ 📜useLandingPage.jsx<br />
+ ┃ ┃ ┗ 📜useMyPage.jsx<br />
+ ┃ ┣ 📂pages<br />
+ ┃ ┃ ┣ 📂auth<br />
+ ┃ ┃ ┃ ┣ 📜Login.jsx<br />
+ ┃ ┃ ┃ ┗ 📜Signup.jsx<br />
+ ┃ ┃ ┣ 📂feed<br />
+ ┃ ┃ ┃ ┣ 📜Feed.jsx<br />
+ ┃ ┃ ┃ ┣ 📜ModalMap.jsx<br />
+ ┃ ┃ ┃ ┣ 📜Posting.jsx<br />
+ ┃ ┃ ┃ ┣ 📜RidingMap.jsx<br />
+ ┃ ┃ ┃ ┣ 📜Thumb.jsx<br />
+ ┃ ┃ ┃ ┗ 📜TopButton.jsx<br />
+ ┃ ┃ ┣ 📂home<br />
+ ┃ ┃ ┃ ┣ 📜Filter.jsx<br />
+ ┃ ┃ ┃ ┣ 📜Home.jsx<br />
+ ┃ ┃ ┃ ┣ 📜List.jsx<br />
+ ┃ ┃ ┃ ┣ 📜Pagination.jsx<br />
+ ┃ ┃ ┃ ┗ 📜Search.jsx<br />
+ ┃ ┃ ┣ 📂landing<br />
+ ┃ ┃ ┃ ┗ 📜Landing.jsx<br />
+ ┃ ┃ ┗ 📂myPage<br />
+ ┃ ┃ ┃ ┣ 📜Mypage.jsx<br />
+ ┃ ┃ ┃ ┗ 📜RideItem.jsx<br />
+ ┃ ┣ 📂queries<br />
+ ┃ ┃ ┣ 📜infiniteQueries.jsx<br />
+ ┃ ┃ ┣ 📜mutaions.jsx<br />
+ ┃ ┃ ┗ 📜query.keys.js<br />
+ ┃ ┣ 📂shared<br />
+ ┃ ┃ ┗ 📜Router.jsx<br />
+ ┃ ┣ 📂store<br />
+ ┃ ┃ ┗ 📜useUserStore.js<br />
+ ┃ ┣ 📂utils<br />
+ ┃ ┃ ┣ 📜calculateTotalDistance.js<br />
+ ┃ ┃ ┗ 📜scrollToTargetRef.js<br />
+ ┃ ┣ 📜App.jsx<br />
+ ┃ ┣ 📜index.css<br />
+ ┃ ┗ 📜main.jsx<br />
+ ┣ 📜.env.local<br />
+ ┣ 📜.gitignore<br />
+ ┣ 📜.prettierignore<br />
+ ┣ 📜.prettierrc<br />
+ ┣ 📜db.json<br />
+ ┣ 📜db1.json<br />
+ ┣ 📜db2.json<br />
+ ┣ 📜eslint.config.js<br />
+ ┣ 📜index.html<br />
+ ┣ 📜package.json<br />
+ ┣ 📜README.md<br />
+ ┣ 📜vercel.json<br />
+ ┣ 📜vite.config.js<br />
+ ┗ 📜yarn.lock<br />
  </details>
 
 <br/>
